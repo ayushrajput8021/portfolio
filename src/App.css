@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 .text-shadow-glow-subtle {
 	text-shadow: 0 0 12px rgba(255, 255, 255, 0.419);
