@@ -6,7 +6,7 @@
 	text-shadow: 0 0 12px rgba(255, 255, 255, 0.419);
 }
 .font-garamond {
-	font-family: 'EB Garamond', serif;
+	font-family: 'Nonito', monospace;
 	font-style: italic;
 }
 
@@ -52,8 +52,9 @@
 	filter: invert(1);
 	transform: scale(1.5);
 }
-.dark .tech-icon:hover {
-	filter: invert(1);
+.dark .tech-icon:hover .tech-text {
+	color: #ffffff;
+	display: block;
 }
 .squircle {
 	width: 256px;
@@ -84,7 +85,7 @@
 	}
 }
 .font-space-mono {
-	font-family: 'Space Mono', monospace;
+	font-family: 'Nonito', monospace;
 }
 .footer-text {
 	transition: letter-spacing 0.8s ease;
@@ -212,7 +213,7 @@
 }
 
 .read-more {
-	font-family: 'Space Mono', monospace;
+	font-family: 'Nonito', monospace;
 	text-transform: uppercase;
 	text-decoration: underline;
 	display: inline-flex;

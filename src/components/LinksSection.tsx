@@ -1,22 +1,33 @@
 export default function LinksSection() {
 	return (
-		<section id='links' className='section py-20'>
-			<div className='container mx-auto px-4'>
-				<h2 className='text-3xl font-bold mb-12 text-center font-space-mono'>
+		<section id='links' className='items-center justify-center gap-8 py-20 '>
+			<div className='flex flex-col items-center justify-center gap-12 px-4'>
+				<h2 className='text-4xl font-semibold text-center font-space-mono'>
 					Connect with me
 				</h2>
-				<nav className='nav-container'>
+				<nav className='flex gap-6'>
 					<a
 						href='https://github.com/ayushrajput8021'
-						className='nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold'
+						className='flex text-xl font-bold text-gray-600 nav-link md:text-2xl dark:text-gray-400'
 					>
-						<i data-lucide='instagram' className='w-6 h-6'></i>
+						<img
+							src='https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/github.svg'
+							alt='GitHub'
+							title='GitHub'
+							className='invert size-6'
+						/>
 						<span className='text-gradient'>Github</span>
 					</a>
 					<a
 						href='https://www.linkedin.com/in/ayush-rajput/'
-						className='nav-link text-xl md:text-2xl text-gray-600 dark:text-gray-400 font-bold'
+						className='flex text-xl font-bold text-gray-600 nav-link md:text-2xl dark:text-gray-400'
 					>
+						<img
+							src='https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg'
+							alt='LinkedIn'
+							title='LinkedIn'
+							className='invert size-6'
+						/>
 						<span className='text-gradient'>LinkedIn</span>
 					</a>
 				</nav>

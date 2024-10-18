@@ -5,6 +5,7 @@ import SkillsSection from './components/SkillsSection';
 import LinksSection from './components/LinksSection';
 import Footer from './components/Footer';
 import ProjectsSection from './components/ProjectsSection';
+import FunFactSection from './components/FunFactSection';
 
 // Main App Component
 const App = () => {
@@ -57,10 +58,10 @@ const App = () => {
 		<div
 			className={`bg-light dark:bg-dark text-dark dark:text-white min-h-screen flex flex-col font-['Inter'] transition-colors duration-300`}
 		>
-			<div className='absolute top-8 right-8 z-10'>
+			<div className='absolute z-10 top-8 right-8'>
 				<button
 					onClick={toggleTheme}
-					className='p-2 rounded-lg bg-dark dark:bg-light text-light dark:text-dark w-10 h-10 flex items-center justify-center'
+					className='flex items-center justify-center w-10 h-10 p-2 rounded-lg bg-dark dark:bg-light text-light dark:text-dark'
 				>
 					{darkMode ? (
 						<img src='/sun.svg' alt='sun' className='w-5 h-5' />
@@ -70,12 +71,13 @@ const App = () => {
 				</button>
 			</div>
 
-			<main className='flex-grow flex flex-col'>
+			<main className='flex flex-col flex-grow'>
 				<HeroSection />
 				<AboutSection />
 				<SkillsSection />
 				<LinksSection />
 				<ProjectsSection />
+				<FunFactSection />
 			</main>
 
 			<Footer />
