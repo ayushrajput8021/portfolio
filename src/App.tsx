@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import SkillsSection from './components/SkillsSection';
@@ -72,6 +73,7 @@ const App = () => {
 			</div>
 
 			<main className='flex flex-col flex-grow'>
+				<Analytics />
 				<HeroSection />
 				<AboutSection />
 				<SkillsSection />
