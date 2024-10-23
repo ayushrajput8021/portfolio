@@ -1,5 +1,5 @@
 'use client';
-import { Analytics } from '@vercel/analytics/react';
+
 import AboutSection from './components/sections/AboutSection';
 import HeroSection from './components/sections/HeroSection';
 import { motion, useScroll } from 'framer-motion';
@@ -21,7 +21,7 @@ export default function Home() {
 				style={{ scaleX: scrollYProgress }}
 			/>
 			<main className='flex flex-col flex-grow'>
-				<Analytics />
+
 				<HeroSection />
 				<Slide>
 					<AboutSection />
