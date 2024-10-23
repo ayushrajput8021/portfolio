@@ -4,6 +4,7 @@ import './globals.css';
 import { siteConfig } from '@/config/site-config';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const nunito = localFont({
 	src: './fonts/Nunito-Regular.ttf',
@@ -24,6 +25,7 @@ export default function RootLayout({
 				{children}
 				<Analytics />
 				<SpeedInsights />
+				<GoogleAnalytics gaId='G-TBV6GNBDJ8' />
 			</body>
 		</html>
 	);
