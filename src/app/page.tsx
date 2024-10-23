@@ -21,7 +21,6 @@ export default function Home() {
 				style={{ scaleX: scrollYProgress }}
 			/>
 			<main className='flex flex-col flex-grow'>
-
 				<HeroSection />
 				<Slide>
 					<AboutSection />
