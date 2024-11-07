@@ -1,6 +1,6 @@
 export default function FunFactSection() {
 	return (
-		<section id='about' className='py-5 bg-gray-100 section dark:bg-gray-900'>
+		<section id='about' className='py-5 bg-gray-100 section dark:bg-[#000000]'>
 			<div className='flex flex-col items-center justify-center p-6'>
 				<h2 className='mb-10 text-4xl font-bold text-center font-garamond text-gray-800 dark:text-gray-200'>
 					Fun Fact

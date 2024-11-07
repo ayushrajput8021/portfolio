@@ -1,175 +1,255 @@
+'use client';
 import Image from 'next/image';
-import React from 'react';
-import { Tooltip } from 'react-tooltip';
+import React, { useEffect } from 'react';
+
+// Importing components
+import OrbitingCircles from '@/components/ui/orbiting-circles';
+
+// Importing images
+
+// Importing devops images
+import AwsIcon from '@/app/images/Devops/AWS.svg';
+import NginxIcon from '@/app/images/Devops/NGINX.svg';
+import VercelIcon from '@/app/images/Devops/Vercel.svg';
+import DockerIcon from '@/app/images/Devops/Docker.svg';
+
+// Importing frontend images
+import ReactIcon from '@/app/images/Frontend/React.svg';
+import NextIcon from '@/app/images/Frontend/Next.js.svg';
+import TailwindIcon from '@/app/images/Frontend/TailwindCSS.svg';
+import ReduxIcon from '@/app/images/Frontend/Redux.svg';
+import TypescriptIcon from '@/app/images/Frontend/Typescript.svg';
+import JavascriptIcon from '@/app/images/Frontend/Javascript.svg';
+
+// Importing backend images
+import NodeIcon from '@/app/images/Backend/Node.js.svg';
+import ExpressIcon from '@/app/images/Backend/Express.svg';
+import FlaskIcon from '@/app/images/Backend/Flask.svg';
+
+// Importing database images
+import MongodbIcon from '@/app/images/Database/Mongodb.svg';
+import PostgresqlIcon from '@/app/images/Database/PostgresSQL.svg';
+import MysqlIcon from '@/app/images/Database/Mysql.svg';
+import RedisIcon from '@/app/images/Database/Redis.svg';
 
 export default function SkillsSection() {
+  const [frontendRadius, setFrontendRadius] = React.useState(300);
+  const [backendRadius, setBackendRadius] = React.useState(120);
+  const [databaseRadius, setDatabaseRadius] = React.useState(180);
+  const [devopsRadius, setDevopsRadius] = React.useState(240);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setFrontendRadius(150);
+        setBackendRadius(60);
+        setDatabaseRadius(90);
+        setDevopsRadius(120);
+      } else if (window.innerWidth < 1024) {
+        setFrontendRadius(225);
+        setBackendRadius(90);
+        setDatabaseRadius(135);
+        setDevopsRadius(180);
+      } else {
+        setFrontendRadius(300);
+        setBackendRadius(120);
+        setDatabaseRadius(180);
+        setDevopsRadius(240);
+      }
+    };
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 	return (
 		<section id='skills' className='py-20 section'>
 			<div className='container px-8 mx-auto sm:px-16'>
 				<h2 className='mb-12 text-3xl font-bold text-center font-space-mono'>
 					What I fiddle with....
 				</h2>
-				<div className='grid grid-cols-3 gap-10 sm:grid-cols-4 lg:grid-cols-8 justify-items-center'>
-					{[
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/javascript.svg',
-							alt: 'JavaScript',
-							title: 'JavaScript',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/typescript.svg',
-							alt: 'TypeScript',
-							title: 'TypeScript',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/react.svg',
-							alt: 'React',
-							title: 'React',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/nodedotjs.svg',
-							alt: 'Node.js',
-							title: 'Node.js',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/express.svg',
-							alt: 'Express',
-							title: 'Express.js',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/mongodb.svg',
-							alt: 'MongoDB',
-							title: 'MongoDB',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/prisma.svg',
-							alt: 'Prisma',
-							title: 'Prisma',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/postgresql.svg',
-							alt: 'PostgreSQL',
-							title: 'PostgreSQL',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/vercel.svg',
-							alt: 'Vercel',
-							title: 'Vercel',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/nextdotjs.svg',
-							alt: 'Next.js',
-							title: 'Next.js',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/redux.svg',
-							alt: 'Redux',
-							title: 'Redux',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/nginx.svg',
-							alt: 'Nginx',
-							title: 'Nginx',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/supabase.svg',
-							alt: 'Supabase',
-							title: 'Supabase',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/github.svg',
-							alt: 'GitHub',
-							title: 'GitHub',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/tailwindcss.svg',
-							alt: 'Tailwind CSS',
-							title: 'Tailwind CSS',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/docker.svg',
-							alt: 'Docker',
-							title: 'Docker',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/postman.svg',
-							alt: 'Postman',
-							title: 'Postman',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/amazonwebservices.svg',
-							alt: 'AWS',
-							title: 'Amazon Web Services',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/redis.svg',
-							alt: 'Redis',
-							title: 'Redis',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/zod.svg',
-							alt: 'Zod',
-							title: 'Zod',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/flask.svg',
-							alt: 'Flask',
-							title: 'Flask',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/cplusplus.svg',
-							alt: 'C++',
-							title: 'C++ Programming Language',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linux.svg',
-							alt: 'Linux',
-							title: 'Linux',
-							id: crypto.randomUUID(),
-						},
-						{
-							src: 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/python.svg',
-							alt: 'Python',
-							title: 'Python',
-							id: crypto.randomUUID(),
-						},
-					].map((icon) => (
-						<React.Fragment key={icon.id}>
-							<Image
-								data-tooltip-id='my-tooltip'
-								data-tooltip-content={icon.alt}
-								data-tooltip-place='top'
-								width={50}
-								height={50}
-								src={icon.src}
-								alt={icon.alt}
-								className='w-[64px] h-[64px] [transition:filter_0.1s_ease,_transform_0.2s_ease] filter invert-[0.4] hover:filter hover:invert hover:scale-150 '
-							/>
-							<Tooltip id='my-tooltip' />
-						</React.Fragment>
-					))}
+				<div className='relative flex h-[500px] sm:h-[600px] lg:h-[700px] w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background md:shadow-xl'>
+					<span className='pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300 bg-clip-text text-center text-3xl font-semibold leading-none text-transparent dark:from-white dark:to-black'>
+						Technologies
+					</span>
+
+					{/* Orbiting circles with responsive sizes */}
+					{/* Backend icons */}
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={0}
+						radius={backendRadius}
+					>
+						<Image src={NodeIcon} alt='Node.js' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={6.66}
+						radius={backendRadius}
+					>
+						<Image src={ExpressIcon} alt='Express' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={13.12}
+						radius={backendRadius}
+					>
+						<Image src={FlaskIcon} alt='Flask' width={50} height={50} />
+					</OrbitingCircles>
+
+					{/* Database icons */}
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={5}
+						radius={databaseRadius}
+						reverse
+					>
+						<Image src={MongodbIcon} alt='MongoDB' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={10}
+						radius={databaseRadius}
+						reverse
+					>
+						<Image
+							src={PostgresqlIcon}
+							alt='PostgresSQL'
+							width={50}
+							height={50}
+						/>
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={15}
+						radius={databaseRadius}
+						reverse
+					>
+						<Image src={MysqlIcon} alt='Mysql' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={20}
+						radius={databaseRadius}
+						reverse
+					>
+						<Image src={RedisIcon} alt='Redis' width={50} height={50} />
+					</OrbitingCircles>
+
+					{/* DevOps icons */}
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={5}
+						radius={devopsRadius}
+					>
+						<Image src={AwsIcon} alt='AWS' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={10}
+						radius={devopsRadius}
+					>
+						<Image src={NginxIcon} alt='Nginx' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={15}
+						radius={devopsRadius}
+					>
+						<Image src={VercelIcon} alt='Vercel' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={20}
+						radius={devopsRadius}
+					>
+						<Image src={DockerIcon} alt='Docker' width={50} height={50} />
+					</OrbitingCircles>
+
+					{/* Frontend icons */}
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={0}
+						radius={frontendRadius}
+						reverse
+					>
+						<Image src={ReactIcon} alt='React' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={3.33}
+						radius={frontendRadius}
+						reverse
+					>
+						<Image src={NextIcon} alt='Next.js' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={6.66}
+						radius={frontendRadius}
+						reverse
+					>
+						<Image
+							src={TailwindIcon}
+							alt='TailwindCSS'
+							width={50}
+							height={50}
+						/>
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={10}
+						radius={frontendRadius}
+						reverse
+					>
+						<Image src={ReduxIcon} alt='Redux' width={50} height={50} />
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={13.33}
+						radius={frontendRadius}
+						reverse
+					>
+						<Image
+							src={TypescriptIcon}
+							alt='Typescript'
+							width={50}
+							height={50}
+						/>
+					</OrbitingCircles>
+					<OrbitingCircles
+						className='size-[30px] sm:size-[40px] lg:size-[50px] border-none bg-transparent'
+						duration={20}
+						delay={16.66}
+						radius={frontendRadius}
+						reverse
+					>
+						<Image
+							src={JavascriptIcon}
+							alt='Javascript'
+							width={50}
+							height={50}
+						/>
+					</OrbitingCircles>
 				</div>
 			</div>
 		</section>

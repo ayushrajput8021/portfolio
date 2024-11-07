@@ -43,7 +43,7 @@ export default function ProjectsSection() {
 	return (
 		<section
 			id='projects'
-			className='py-20 bg-gray-100 section dark:bg-gray-900'
+			className='py-20 bg-gray-100 section dark:bg-[#1A1A1A]'
 		>
 			<div className='container px-8 mx-auto'>
 				<h2 className='mb-12 text-3xl font-bold text-center font-space-mono'>

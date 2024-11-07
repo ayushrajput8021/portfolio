@@ -3,7 +3,7 @@ import Avatar from '@/app/images/avatar.jpeg';
 
 export default function AboutSection() {
 	return (
-		<section id='about' className='py-16 bg-gray-100 dark:bg-gray-900'>
+		<section id='about' className='py-16 bg-gray-100 dark:bg-[#1A1A1A]'>
 			<div className='container mx-auto px-6 md:px-12'>
 				<h2 className='mb-10 text-4xl font-bold text-center font-garamond text-gray-800 dark:text-gray-200'>
 					About Me
