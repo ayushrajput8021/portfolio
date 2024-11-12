@@ -18,8 +18,8 @@ import ReactIcon from '@/app/images/Frontend/React.svg';
 import NextIcon from '@/app/images/Frontend/Next.js.svg';
 import TailwindIcon from '@/app/images/Frontend/TailwindCSS.svg';
 import ReduxIcon from '@/app/images/Frontend/Redux.svg';
-import TypescriptIcon from '@/app/images/Frontend/Typescript.svg';
-import JavascriptIcon from '@/app/images/Frontend/Javascript.svg';
+import TypescriptIcon from '@/app/images/Frontend/TypeScript.svg';
+import JavascriptIcon from '@/app/images/Frontend/JavaScript.svg';
 
 // Importing backend images
 import NodeIcon from '@/app/images/Backend/Node.js.svg';
@@ -27,9 +27,9 @@ import ExpressIcon from '@/app/images/Backend/Express.svg';
 import FlaskIcon from '@/app/images/Backend/Flask.svg';
 
 // Importing database images
-import MongodbIcon from '@/app/images/Database/Mongodb.svg';
+import MongodbIcon from '@/app/images/Database/MongoDB.svg';
 import PostgresqlIcon from '@/app/images/Database/PostgresSQL.svg';
-import MysqlIcon from '@/app/images/Database/Mysql.svg';
+import MysqlIcon from '@/app/images/Database/MySQL.svg';
 import RedisIcon from '@/app/images/Database/Redis.svg';
 
 export default function SkillsSection() {
