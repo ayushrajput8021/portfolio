@@ -18,13 +18,13 @@ export default function HeroSection() {
 
 	return (
 		<section className='flex items-center justify-center min-h-screen relative'>
-			<button
+			{/* <button
 				onClick={() => {
 					setTheme(theme === 'dark' ? 'light' : 'dark');
 				}}
 			>
 				click
-			</button>
+			</button> */}
 			<div className='text-center max-w-5xl mx-auto px-4'>
 				<GradualSpacing
 					className=' text-center text-4xl font-bold -tracking-wider  text-black dark:text-white md:text-7xl md:leading-[5rem]'
