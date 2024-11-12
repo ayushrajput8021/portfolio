@@ -9,7 +9,7 @@ import GradualSpacing from '@/components/ui/gradual-spacing';
 
 
 export default function HeroSection() {
-	const { theme, setTheme } = useTheme();
+	const { theme } = useTheme();
 	const [color, setColor] = useState('#ffffff');
 
 	useEffect(() => {
