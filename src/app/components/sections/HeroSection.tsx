@@ -1,14 +1,16 @@
-import Image from 'next/image';
-import Github from '@/app/images/github-white.svg';
-import Mail from '@/app/images/mail-white.svg';
 import { Button } from '@nextui-org/button';
 import Particles from '@/app/components/ui/particles';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { GithubIcon } from '@/app/components/Icons/GithubIcon';
 import GradualSpacing from '@/app/components/ui/gradual-spacing';
+import { GmailIcon } from '@/app/components/Icons/GmailIcon';
+import { GITHUB_URL, GMAIL_URL } from '@/app/utils/constants';
+import SunIcon from '@/app/components/Icons/SunIcon';
+import MoonIcon from '@/app/components/Icons/MoonIcon';
 
 export default function HeroSection() {
-	const { theme } = useTheme();
+	const { theme, setTheme } = useTheme();
 	const [color, setColor] = useState('#ffffff');
 
 	useEffect(() => {
@@ -17,47 +19,61 @@ export default function HeroSection() {
 
 	return (
 		<section className='flex items-center justify-center min-h-screen relative'>
-			{/* <button
+			{/* Theme Toggle Button - Top Right */}
+			<button
 				onClick={() => {
 					setTheme(theme === 'dark' ? 'light' : 'dark');
 				}}
+				className='group absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800
+            hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300
+            text-gray-800 dark:text-white shadow-md hover:shadow-lg'
+				aria-label='Toggle theme'
 			>
-				click
-			</button> */}
+				{theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+			</button>
+
 			<div className='text-center max-w-5xl mx-auto px-4'>
 				<GradualSpacing
-					className=' text-center text-4xl font-bold -tracking-wider  text-black dark:text-white md:text-7xl md:leading-[5rem]'
+					className='text-center text-4xl font-bold -tracking-wider text-black
+                              dark:text-white md:text-7xl md:leading-[5rem]'
 					text='Ayush Rajput'
 				/>
 				<p className='text-xl md:text-2xl font-semibold mb-8'>
 					<span className='text-gray-600 dark:text-[#C9C9C9]'>Full Stack </span>
-					<span className='bg-gradient-to-r from-[#9C83FF] to-[#FF9051] text-transparent bg-clip-text'>
+					<span
+						className='bg-gradient-to-r from-[#9C83FF] to-[#FF9051]
+                                   text-transparent bg-clip-text'
+					>
 						Developer
 					</span>
 				</p>
 
 				<div className='flex justify-center space-x-4 items-center'>
 					<Button
-						className='flex items-center space-x-2 text-white hover:text-white font-semibold tracking-wider'
+						className='group flex items-center space-x-2 bg-purple-600/10
+                                 dark:bg-purple-900/20 border border-purple-500/20
+                                 text-purple-600 dark:text-purple-400 font-semibold
+                                 tracking-wider transition-all duration-300
+                                 hover:bg-purple-600/20 dark:hover:bg-purple-900/30
+                                 hover:scale-105 hover:shadow-md'
 						variant='ghost'
-						color='secondary'
-						endContent={
-							<Image src={Github} alt='github-white' width={24} height={24} />
-						}
+						endContent={<GithubIcon />}
 						onClick={() => {
-							window.open('https://github.com/ayushrajput8021');
+							window.open(GITHUB_URL);
 						}}
 					>
 						Github
 					</Button>
-					<a href='mailto:ayushrajput8021@gmail.com'>
+					<a href={`mailto:${GMAIL_URL}`}>
 						<Button
-							className='flex items-center space-x-2 text-white hover:text-white font-semibold tracking-wider'
+							className='group flex items-center space-x-2 bg-red-600/10
+                                     dark:bg-red-900/20 border border-red-500/20
+                                     text-red-600 dark:text-red-400 font-semibold
+                                     tracking-wider transition-all duration-300
+                                     hover:bg-red-600/20 dark:hover:bg-red-900/30
+                                     hover:scale-105 hover:shadow-md'
 							variant='ghost'
-							color='danger'
-							endContent={
-								<Image src={Mail} alt='mail' width={24} height={24} />
-							}
+							endContent={<GmailIcon />}
 						>
 							Contact Me
 						</Button>
@@ -65,7 +81,10 @@ export default function HeroSection() {
 				</div>
 			</div>
 
-			<div className='absolute bottom-[20px] left-2/4 -translate-x-1/2 animate-[bounce_2s_infinite]'>
+			<div
+				className='absolute bottom-[20px] left-2/4 -translate-x-1/2
+                          animate-[bounce_2s_infinite]'
+			>
 				<i className='w-8 h-8'>⬇️</i>
 			</div>
 			<Particles
