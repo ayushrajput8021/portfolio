@@ -1,6 +1,6 @@
+'use client';
 import Image from 'next/image';
 import { Carousel } from 'react-responsive-carousel';
-
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 // Project data
@@ -21,7 +21,7 @@ const projects = [
 	{
 		title: 'Natours',
 		description:
-			'This is a backend-focused project used to book tours. It includes the following features: Payment Gateway: Utilizes Stripe for secure and efficient payment processing.',
+			'A backend-focused project for booking tours, featuring Stripe payment gateway for secure transactions.',
 		url: 'https://natours.ayushrajput.live/',
 		githubUrl: 'https://github.com/ayushrajput8021/natoursv1',
 		image: [
@@ -43,17 +43,27 @@ export default function ProjectsSection() {
 	return (
 		<section
 			id='projects'
-			className='py-20 bg-gray-100 section dark:bg-[#1A1A1A]'
+			className='py-20 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
 		>
-			<div className='container px-8 mx-auto'>
-				<h2 className='mb-12 text-3xl font-bold text-center font-space-mono'>
-					Some of my Projects
+			<div className='container px-4 sm:px-6 lg:px-8 mx-auto max-w-6xl'>
+				<h2
+					className='mb-12 text-3xl md:text-4xl font-bold text-center font-space-mono
+                              text-gray-900 dark:text-gray-100
+                              hover:text-gray-800 dark:hover:text-gray-50
+                              transition-colors duration-300'
+				>
+					My Projects
 				</h2>
-				<div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
+				<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
 					{projects.map((project, index) => (
-						<div key={index} className=''>
-							<div className='mb-4 project-thumbnail'>
-								{/* Carousel for multiple images */}
+						<div
+							key={index}
+							className='group bg-white dark:bg-[#101010] rounded-xl
+                                      border border-gray-200/50 dark:border-gray-800/50
+                                      shadow-md hover:shadow-xl
+                                      transition-all duration-500 overflow-hidden'
+						>
+							<div className='relative h-[300px] mb-6'>
 								{project.image.length > 1 ? (
 									<Carousel
 										showThumbs={false}
@@ -61,81 +71,174 @@ export default function ProjectsSection() {
 										infiniteLoop
 										showArrows={true}
 										showStatus={false}
-										showIndicators={false}
+										showIndicators={true}
+										className='h-full'
 									>
 										{project.image.map((img, imgIndex) => (
-											<div key={imgIndex}>
+											<div key={imgIndex} className='h-[300px]'>
 												<Image
 													src={img}
 													width={800}
 													height={900}
 													quality={100}
 													alt={`${project.title} image ${imgIndex + 1}`}
+													className='object-cover h-full w-full
+                                                              group-hover:scale-105
+                                                              transition-transform duration-500'
 												/>
 											</div>
 										))}
 									</Carousel>
 								) : (
-									// Single image
 									<Image
 										src={project.image[0]}
 										alt={project.title}
 										fill
-										className='object-cover object-top'
 										quality={100}
+										className='object-cover object-top
+                                                  group-hover:scale-105
+                                                  transition-transform duration-500'
 									/>
 								)}
-								<div className='redirect-icon'>
-									<i data-lucide='external-link'></i>
-								</div>
-							</div>
-							<h3 className='mb-2 text-xl font-bold'>{project.title}</h3>
-							<p className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
-								{project.description}
-							</p>
-							<div className='flex gap-4'>
 								<a
 									href={project.url}
 									target='_blank'
 									rel='noopener noreferrer'
-									className='inline-block px-4 py-2 text-sm font-semibold text-white bg-blue-500 rounded hover:bg-blue-600'
+									className='absolute top-4 right-4 p-2 bg-gray-800/70
+                                              dark:bg-gray-900/70 rounded-full
+                                              hover:bg-gray-700 dark:hover:bg-gray-800
+                                              transition-all duration-300 opacity-0
+                                              group-hover:opacity-100'
 								>
-									Visit Website
+									<svg
+										className='w-5 h-5 text-white'
+										fill='none'
+										stroke='currentColor'
+										viewBox='0 0 24 24'
+									>
+										<path
+											strokeLinecap='round'
+											strokeLinejoin='round'
+											strokeWidth={2}
+											d='M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14'
+										/>
+									</svg>
 								</a>
-								{project.githubUrl ? (
-									<a
-										href={project.githubUrl}
-										target='_blank'
-										rel='noopener noreferrer'
-										className='inline-block px-4 py-2 text-sm font-semibold text-white bg-gray-800 rounded hover:bg-gray-900'
-									>
-										GitHub Repo
-										<i data-lucide='github' className='ml-2'></i>
-									</a>
-								) : null}
 							</div>
-							{project.githubUrl ? (
-								<div className='mt-4 repo-actions'>
+							<div className='p-6'>
+								<h3
+									className='mb-3 text-xl font-bold text-gray-900 dark:text-gray-100
+                                              group-hover:text-blue-600 dark:group-hover:text-blue-400
+                                              transition-colors duration-300'
+								>
+									{project.title}
+								</h3>
+								<p
+									className='mb-4 text-gray-600 dark:text-gray-400 text-sm
+                                              leading-relaxed'
+								>
+									{project.description}
+								</p>
+								<div className='flex flex-wrap gap-4'>
 									<a
-										href={`${project.githubUrl}/stargazers`}
+										href={project.url}
 										target='_blank'
 										rel='noopener noreferrer'
-										className='inline-block mr-4 repo-action'
+										className='inline-flex items-center px-4 py-2
+                                                  bg-blue-600 text-white text-sm font-semibold
+                                                  rounded-lg hover:bg-blue-700
+                                                  dark:bg-blue-500 dark:hover:bg-blue-600
+                                                  transition-colors duration-300'
 									>
-										<i data-lucide='star'></i>
-										Star
+										Visit Website
+										<svg
+											className='w-4 h-4 ml-2'
+											fill='none'
+											stroke='currentColor'
+											viewBox='0 0 24 24'
+										>
+											<path
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												strokeWidth={2}
+												d='M13 7l5 5m0 0l-5 5m5-5H6'
+											/>
+										</svg>
 									</a>
-									<a
-										href={`${project.githubUrl}/fork`}
-										target='_blank'
-										rel='noopener noreferrer'
-										className='inline-block repo-action'
-									>
-										<i data-lucide='git-fork'></i>
-										Fork
-									</a>
+									{project.githubUrl && (
+										<a
+											href={project.githubUrl}
+											target='_blank'
+											rel='noopener noreferrer'
+											className='inline-flex items-center px-4 py-2
+                                                      bg-gray-700 text-white text-sm font-semibold
+                                                      rounded-lg hover:bg-gray-800
+                                                      dark:bg-gray-800 dark:hover:bg-gray-900
+                                                      transition-colors duration-300'
+										>
+											GitHub
+											<svg
+												role='img'
+												viewBox='0 0 24 24'
+												xmlns='http://www.w3.org/2000/svg'
+												className='w-4 h-4 ml-2 fill-white dark:fill-gray-300'
+											>
+												<path d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12' />
+											</svg>
+										</a>
+									)}
 								</div>
-							) : null}
+								{project.githubUrl && (
+									<div className='mt-4 flex gap-4'>
+										<a
+											href={`${project.githubUrl}/stargazers`}
+											target='_blank'
+											rel='noopener noreferrer'
+											className='flex items-center text-sm text-gray-600 dark:text-gray-400
+                                                      hover:text-blue-600 dark:hover:text-blue-400
+                                                      transition-colors duration-300'
+										>
+											<svg
+												className='w-4 h-4 mr-1'
+												fill='none'
+												stroke='currentColor'
+												viewBox='0 0 24 24'
+											>
+												<path
+													strokeLinecap='round'
+													strokeLinejoin='round'
+													strokeWidth={2}
+													d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+												/>
+											</svg>
+											Star
+										</a>
+										<a
+											href={`${project.githubUrl}/fork`}
+											target='_blank'
+											rel='noopener noreferrer'
+											className='flex items-center text-sm text-gray-600 dark:text-gray-400
+                                                      hover:text-blue-600 dark:hover:text-blue-400
+                                                      transition-colors duration-300'
+										>
+											<svg
+												className='w-4 h-4 mr-1'
+												fill='none'
+												stroke='currentColor'
+												viewBox='0 0 24 24'
+											>
+												<path
+													strokeLinecap='round'
+													strokeLinejoin='round'
+													strokeWidth={2}
+													d='M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7h18M6 10h12v4H6v-4z'
+												/>
+											</svg>
+											Fork
+										</a>
+									</div>
+								)}
+							</div>
 						</div>
 					))}
 				</div>

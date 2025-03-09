@@ -1,14 +1,14 @@
 import { Metadata } from 'next';
 
 const TITLE =
-	'Ayush Rajpt - Full Stack Developer | React, Node.js, TypeScript, Next.js';
+	'Ayush Rajput - Full Stack Developer | React, Node.js, TypeScript, Next.js';
 const DESCRIPTION =
 	'Hi there! 👋 I m a Full Stack Developer from India with over 1 year of experience in web development. I have a passion for solving complex problems and building innovative web applications. My tech stack includes JavaScript, TypeScript, React, Node.js, Express.js, MongoDB, Prisma, PostgreSQL, Vercel, Next.js, and more.';
 
 const PREVIEW_IMAGE_URL =
 	'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/preview-img';
 const ALT_TITLE =
-	'Ayush Rajpt - Full Stack Developer | React, Node.js, TypeScript, Next.js';
+	'Ayush Rajput - Full Stack Developer | React, Node.js, TypeScript, Next.js';
 const BASE_URL = 'https://ayushrajput.live';
 
 export const siteConfig: Metadata = {
