@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { useTheme } from 'next-themes';
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
+import { ArrowUpIcon } from 'lucide-react';
 
 import Slide from './components/Slider';
 import HeroSection from './components/sections/HeroSection';
@@ -26,25 +27,50 @@ const Footer = dynamic(() => import('./components/sections/Footer'));
 import SunIcon from '@/app/components/Icons/SunIcon';
 import MoonIcon from '@/app/components/Icons/MoonIcon';
 
+// Reusable button class string
+const buttonStyles =
+	'group fixed p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300 text-gray-800 dark:text-white shadow-md hover:shadow-lg z-50';
+
 export default function Home() {
+	const [isScrollButtonVisible, setIsScrollButtonVisible] = useState(false);
 	const { theme, setTheme } = useTheme();
 	const { scrollYProgress } = useScroll();
-	const [mounted, setMounted] = useState(false); // Track if component is mounted
+	const [mounted, setMounted] = useState(false);
 
-	// Ensure theme is only accessed after mounting to avoid hydration issues
+	// Theme initialization
 	useEffect(() => {
-		setMounted(true); // Set mounted to true after the component mounts
+		setMounted(true);
 		const savedTheme = localStorage.getItem('theme') || 'light';
-		setTheme(savedTheme); // Set the theme from localStorage or default to 'light'
+		setTheme(savedTheme);
 	}, [setTheme]);
+
+	// Scroll event handler with throttle (optional optimization)
+	useEffect(() => {
+		let timeoutId: NodeJS.Timeout;
+		const handleScroll = () => {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => {
+				setIsScrollButtonVisible(window.scrollY > 100);
+			}, 100); // Throttle to 100ms
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+			clearTimeout(timeoutId);
+		};
+	}, []);
 
 	const handleThemeToggle = () => {
 		const newTheme = theme === 'dark' ? 'light' : 'dark';
 		setTheme(newTheme);
-		localStorage.setItem('theme', newTheme); // Save to localStorage
+		localStorage.setItem('theme', newTheme);
 	};
 
-	// Prevent rendering until the component is mounted to avoid hydration mismatch
+	const handleScrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
+
 	if (!mounted) {
 		return null; // Or a loading spinner/placeholder
 	}
@@ -58,9 +84,7 @@ export default function Home() {
 			<main className='flex flex-col flex-grow relative'>
 				<button
 					onClick={handleThemeToggle}
-					className='group fixed top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800
-            hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300
-            text-gray-800 dark:text-white shadow-md hover:shadow-lg z-50'
+					className={`${buttonStyles} top-4 right-4`}
 					aria-label='Toggle theme'
 				>
 					{theme === 'dark' ? <SunIcon /> : <MoonIcon />}
@@ -88,6 +112,15 @@ export default function Home() {
 			<Slide>
 				<Footer />
 			</Slide>
+			{isScrollButtonVisible && (
+				<button
+					onClick={handleScrollToTop}
+					className={`${buttonStyles} bottom-4 right-4`}
+					aria-label='Scroll to top'
+				>
+					<ArrowUpIcon />
+				</button>
+			)}
 		</div>
 	);
 }
