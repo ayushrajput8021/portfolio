@@ -6,11 +6,9 @@ import { GithubIcon } from '@/app/components/Icons/GithubIcon';
 import GradualSpacing from '@/app/components/ui/gradual-spacing';
 import { GmailIcon } from '@/app/components/Icons/GmailIcon';
 import { GITHUB_URL, GMAIL_URL } from '@/app/utils/constants';
-import SunIcon from '@/app/components/Icons/SunIcon';
-import MoonIcon from '@/app/components/Icons/MoonIcon';
 
 export default function HeroSection() {
-	const { theme, setTheme } = useTheme();
+	const { theme } = useTheme();
 	const [color, setColor] = useState('#ffffff');
 
 	useEffect(() => {
@@ -19,19 +17,6 @@ export default function HeroSection() {
 
 	return (
 		<section className='flex items-center justify-center min-h-screen relative'>
-			{/* Theme Toggle Button - Top Right */}
-			<button
-				onClick={() => {
-					setTheme(theme === 'dark' ? 'light' : 'dark');
-				}}
-				className='group absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-800
-            hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300
-            text-gray-800 dark:text-white shadow-md hover:shadow-lg'
-				aria-label='Toggle theme'
-			>
-				{theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-			</button>
-
 			<div className='text-center max-w-5xl mx-auto px-4'>
 				<GradualSpacing
 					className='text-center text-4xl font-bold -tracking-wider text-black

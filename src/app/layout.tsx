@@ -5,6 +5,7 @@ import { siteConfig } from '@/config/site-config';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { ThemeProvider } from 'next-themes';
 
 const nunito = localFont({
 	src: './fonts/Nunito-Regular.ttf',
@@ -16,18 +17,15 @@ export const metadata: Metadata = siteConfig;
 
 export default function RootLayout({
 	children,
-}: Readonly<{
+}: {
 	children: React.ReactNode;
-}>) {
+}) {
 	return (
-		<html
-			lang='en'
-			style={{
-				colorScheme: 'dark',
-			}}
-		>
+		<html lang='en' style={{ colorScheme: 'light' }}>
 			<body className={`${nunito.className} antialiased`}>
-				{children}
+				<ThemeProvider attribute='class' defaultTheme='light' enableColorScheme>
+					{children}
+				</ThemeProvider>
 				<Analytics />
 				<SpeedInsights />
 				<GoogleAnalytics gaId='G-TBV6GNBDJ8' />
