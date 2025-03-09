@@ -6,7 +6,7 @@ import { motion, useScroll } from 'framer-motion';
 
 import Slide from './components/Slider';
 import HeroSection from './components/sections/HeroSection';
-
+import ExperienceSection from './components/sections/ExperienceSection';
 const AboutSection = dynamic(
 	() => import('./components/sections/AboutSection')
 );
@@ -38,6 +38,9 @@ export default function Home() {
 					<HeroSection />
 					<Slide>
 						<AboutSection />
+					</Slide>
+					<Slide>
+						<ExperienceSection />
 					</Slide>
 					<Slide>
 						<SkillsSection />
