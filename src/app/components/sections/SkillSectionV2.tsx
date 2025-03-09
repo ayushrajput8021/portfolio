@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React from 'react';
+import { useTheme } from 'next-themes';
 
 // Importing devops images
 import AwsIcon from '@/app/images/Devops/AWS.svg';
@@ -70,9 +71,7 @@ const skillsConfig = [
 	},
 	{
 		title: 'Others',
-		items: [
-			// Add any additional tools here
-		],
+		items: [],
 	},
 ];
 
@@ -82,30 +81,57 @@ interface SkillCategoryProps {
 }
 
 function SkillCategory({ title, items }: SkillCategoryProps) {
+	const { theme } = useTheme();
+
 	return (
-		<div className='relative p-6 bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-all'>
+		<div
+			className='group relative p-6 bg-white dark:bg-[#101010] rounded-xl
+                      border border-gray-200/50 dark:border-gray-800/50 shadow-sm
+                      hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700
+                      transition-all duration-300'
+		>
 			{/* Category Header */}
 			<div className='flex items-center gap-4 mb-6'>
 				{CategoryIcons[title as keyof typeof CategoryIcons]}
-				<h3 className='text-lg font-semibold text-gray-800 dark:text-gray-200'>
+				<h3
+					className='text-lg font-semibold text-gray-800 dark:text-gray-100
+                              group-hover:text-gray-900 dark:group-hover:text-white
+                              transition-colors duration-300'
+				>
 					{title}
 				</h3>
 			</div>
 
 			{/* Skills Grid */}
-			<div className='grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-3'>
+			<div className='grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-3'>
 				{items.map((item, index) => (
-					<div key={index} className='flex flex-col items-center gap-1.5 group'>
-						<div className='p-2 bg-gray-50 dark:bg-gray-800 rounded-lg  flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
+					<div
+						key={index}
+						className='flex flex-col items-center gap-2 group/skill'
+					>
+						<div
+							className={`p-3 rounded-lg flex items-center justify-center
+                                      transition-all duration-300 group-hover/skill:scale-110
+                                      ${
+																				theme === 'light'
+																					? 'bg-gray-800 group-hover/skill:bg-gray-700'
+																					: 'bg-gray-900/50 group-hover/skill:bg-gray-800/70'
+																			}`}
+						>
 							<Image
 								src={item.icon}
 								alt={item.name}
 								width={32}
 								height={32}
-								className='w-6 h-6 object-contain'
+								className='w-7 h-7 object-contain group-hover/skill:scale-105
+                                          transition-transform duration-300'
 							/>
 						</div>
-						<span className='text-xs font-medium text-gray-600 dark:text-gray-400 text-center opacity-90 transition-all'>
+						<span
+							className='text-xs font-medium text-gray-600 dark:text-gray-400
+                                      group-hover/skill:text-gray-700 dark:group-hover/skill:text-gray-300
+                                      text-center transition-colors duration-300'
+						>
 							{item.name}
 						</span>
 					</div>
@@ -117,32 +143,49 @@ function SkillCategory({ title, items }: SkillCategoryProps) {
 
 export default function SkillsSection() {
 	return (
-		<section id='skills' className='py-20 bg-gray-50 dark:bg-gray-950'>
+		<section
+			id='skills'
+			className='py-20 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
+		>
 			<div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl'>
-				<h2 className='text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-gray-100'>
+				<h2
+					className='text-3xl md:text-4xl font-bold text-center mb-12
+                              text-gray-900 dark:text-gray-100
+                              hover:text-gray-800 dark:hover:text-gray-50
+                              transition-colors duration-300'
+				>
 					Technical Expertise
 				</h2>
 
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-					{skillsConfig.map((category, index) => (
-						<SkillCategory
-							key={index}
-							title={category.title}
-							items={category.items}
-						/>
-					))}
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+					{skillsConfig.map(
+						(category, index) =>
+							category.items.length > 0 && (
+								<SkillCategory
+									key={index}
+									title={category.title}
+									items={category.items}
+								/>
+							)
+					)}
 				</div>
 			</div>
 		</section>
 	);
 }
 
-// Category Header Icons (replace previous ones)
+// Category Header Icons (unchanged)
 const CategoryIcons = {
 	Frontend: (
-		<div className='p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg group-hover:bg-blue-200 dark:group-hover:bg-blue-800 transition-colors'>
+		<div
+			className='p-2 bg-blue-100/70 dark:bg-blue-900/30 rounded-lg
+                      group-hover:bg-blue-200 dark:group-hover:bg-blue-800/50
+                      transition-all duration-300'
+		>
 			<svg
-				className='w-6 h-6 text-blue-600 dark:text-blue-400'
+				className='w-6 h-6 text-blue-600 dark:text-blue-400
+                          group-hover:text-blue-700 dark:group-hover:text-blue-300
+                          transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
 				viewBox='0 0 24 24'
@@ -151,15 +194,21 @@ const CategoryIcons = {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 					strokeWidth={2}
-					d='M13 10V3L4 14h7v7l9-11h-7z'
+					d='M7 21a4 4 0 01-4-4V5a2 2 0 012-2h14a2 2 0 012 2v12a4 4 0 01-4 4H7zm0 0h10a4 4 0 004-4V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a4 4 0 004 4z'
 				/>
 			</svg>
 		</div>
 	),
 	Backend: (
-		<div className='p-2 bg-green-100 dark:bg-green-900/50 rounded-lg group-hover:bg-green-200 dark:group-hover:bg-green-800 transition-colors'>
+		<div
+			className='p-2 bg-green-100/70 dark:bg-green-900/30 rounded-lg
+                      group-hover:bg-green-200 dark:group-hover:bg-green-800/50
+                      transition-all duration-300'
+		>
 			<svg
-				className='w-6 h-6 text-green-600 dark:text-green-400'
+				className='w-6 h-6 text-green-600 dark:text-green-400
+                          group-hover:text-green-700 dark:group-hover:text-green-300
+                          transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
 				viewBox='0 0 24 24'
@@ -168,21 +217,21 @@ const CategoryIcons = {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 					strokeWidth={2}
-					d='M13 10V3L4 14h7v7l9-11h-7z'
-				/>
-				<path
-					strokeLinecap='round'
-					strokeLinejoin='round'
-					strokeWidth={2}
-					d='M20 14l-4 4-4-4'
+					d='M5 12h14M5 12l4-4m-4 4l4 4'
 				/>
 			</svg>
 		</div>
 	),
 	Database: (
-		<div className='p-2 bg-purple-100 dark:bg-purple-900/50 rounded-lg group-hover:bg-purple-200 dark:group-hover:bg-purple-800 transition-colors'>
+		<div
+			className='p-2 bg-purple-100/70 dark:bg-purple-900/30 rounded-lg
+                      group-hover:bg-purple-200 dark:group-hover:bg-purple-800/50
+                      transition-all duration-300'
+		>
 			<svg
-				className='w-6 h-6 text-purple-600 dark:text-purple-400'
+				className='w-6 h-6 text-purple-600 dark:text-purple-400
+                          group-hover:text-purple-700 dark:group-hover:text-purple-300
+                          transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
 				viewBox='0 0 24 24'
@@ -191,15 +240,21 @@ const CategoryIcons = {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 					strokeWidth={2}
-					d='M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4'
+					d='M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'
 				/>
 			</svg>
 		</div>
 	),
 	'Cloud/DevOps': (
-		<div className='p-2 bg-orange-100 dark:bg-orange-900/50 rounded-lg group-hover:bg-orange-200 dark:group-hover:bg-orange-800 transition-colors'>
+		<div
+			className='p-2 bg-orange-100/70 dark:bg-orange-900/30 rounded-lg
+                      group-hover:bg-orange-200 dark:group-hover:bg-orange-800/50
+                      transition-all duration-300'
+		>
 			<svg
-				className='w-6 h-6 text-orange-600 dark:text-orange-400'
+				className='w-6 h-6 text-orange-600 dark:text-orange-400
+                          group-hover:text-orange-700 dark:group-hover:text-orange-300
+                          transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
 				viewBox='0 0 24 24'
@@ -214,9 +269,15 @@ const CategoryIcons = {
 		</div>
 	),
 	Deployment: (
-		<div className='p-2 bg-red-100 dark:bg-red-900/50 rounded-lg group-hover:bg-red-200 dark:group-hover:bg-red-800 transition-colors'>
+		<div
+			className='p-2 bg-red-100/70 dark:bg-red-900/30 rounded-lg
+                      group-hover:bg-red-200 dark:group-hover:bg-red-800/50
+                      transition-all duration-300'
+		>
 			<svg
-				className='w-6 h-6 text-red-600 dark:text-red-400'
+				className='w-6 h-6 text-red-600 dark:text-red-400
+                          group-hover:text-red-700 dark:group-hover:text-red-300
+                          transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
 				viewBox='0 0 24 24'
@@ -225,15 +286,21 @@ const CategoryIcons = {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 					strokeWidth={2}
-					d='M5 12h14M12 5l7 7-7 7'
+					d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
 				/>
 			</svg>
 		</div>
 	),
 	Others: (
-		<div className='p-2 bg-pink-100 dark:bg-pink-900/50 rounded-lg group-hover:bg-pink-200 dark:group-hover:bg-pink-800 transition-colors'>
+		<div
+			className='p-2 bg-pink-100/70 dark:bg-pink-900/30 rounded-lg
+                      group-hover:bg-pink-200 dark:group-hover:bg-pink-800/50
+                      transition-all duration-300'
+		>
 			<svg
-				className='w-6 h-6 text-pink-600 dark:text-pink-400'
+				className='w-6 h-6 text-pink-600 dark:text-pink-400
+                          group-hover:text-pink-700 dark:group-hover:text-pink-300
+                          transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
 				viewBox='0 0 24 24'
@@ -242,13 +309,7 @@ const CategoryIcons = {
 					strokeLinecap='round'
 					strokeLinejoin='round'
 					strokeWidth={2}
-					d='M13 10V3L4 14h7v7l9-11h-7z'
-				/>
-				<path
-					strokeLinecap='round'
-					strokeLinejoin='round'
-					strokeWidth={2}
-					d='M17 14l4-4m0 0l-4-4m4 4H3'
+					d='M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4'
 				/>
 			</svg>
 		</div>
