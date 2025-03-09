@@ -65,9 +65,9 @@ export default function LinksSection() {
 					{links.map((link, index) => (
 						<a
 							key={index}
-							href={link.href}
+							href={link.title === 'Gmail' ? `mailto:${link.href}` : link.href}
 							className='group flex items-center gap-3 p-4 rounded-xl
-                       bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800
+                   bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800
                        shadow-sm hover:shadow-lg hover:-translate-y-1
                        transition-all duration-300 transform'
 							target='_blank'

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
-// Project data
+// Project data with added tech stacks
 const projects = [
 	{
 		title: 'Travel List',
@@ -17,6 +17,7 @@ const projects = [
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/travel/3-o5tilNXs9iFHc28eUideemw5Koxm54.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/travel/4-sHMvHXNKqApW1Eo5SQHjtNioeVROXL.png',
 		],
+		tech: ['React', 'JavaScript', 'LocalStorage', 'TailwindCSS'],
 	},
 	{
 		title: 'Natours',
@@ -29,13 +30,14 @@ const projects = [
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/2-gZOGfiyo4HPWpXRuCdappl6RpJnx99.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/3-NIzfru3t6NCALpKaBebHOsgLnukenS.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/4-ClBEQ4Hqwgg27dbnLFODmLW4ybMi3m.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/5-MtGt9yNZMDQItrenUO2n2gZKp3CNSa.png',
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/5-MtGt9yNZMDQItrenUO2n2g5Kp3CNSa.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/6-sd5jlWQUN138IWoGLA7RWFICdHzrD8.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/7-3My6MSLb1QZtawFSLO0lkU4Qp4YhhQ.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/8-C6b1UIVXNQ2LemUZT99uT1ZRIR9y9E.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/9-ra0lgBEjQXlYuCKcUzSxbiVrjaVEKR.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/10-Cpo0pdk9LcudjfqtjX1bsNd1A1H48W.png',
 		],
+		tech: ['Node.js', 'Express', 'MongoDB', 'Stripe', 'Pug', 'CSS'],
 	},
 ];
 
@@ -139,6 +141,21 @@ export default function ProjectsSection() {
 								>
 									{project.description}
 								</p>
+								{/* Tech Badges */}
+								<div className='mb-4 flex flex-wrap gap-2'>
+									{project.tech.map((tech, techIndex) => (
+										<span
+											key={techIndex}
+											className='px-2 py-1 bg-gray-200 dark:bg-gray-800
+                                                      text-gray-700 dark:text-gray-300
+                                                      text-xs font-medium rounded-full
+                                                      hover:bg-gray-300 dark:hover:bg-gray-700
+                                                      transition-colors duration-300'
+										>
+											{tech}
+										</span>
+									))}
+								</div>
 								<div className='flex flex-wrap gap-4'>
 									<a
 										href={project.url}
