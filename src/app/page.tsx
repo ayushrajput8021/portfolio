@@ -11,7 +11,7 @@ const AboutSection = dynamic(
 	() => import('./components/sections/AboutSection')
 );
 const SkillsSection = dynamic(
-	() => import('./components/sections/SkillSection')
+	() => import('./components/sections/SkillSectionV2')
 );
 const LinksSection = dynamic(
 	() => import('./components/sections/LinksSection')

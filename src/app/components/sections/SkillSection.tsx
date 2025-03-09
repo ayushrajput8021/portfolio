@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 
 // Importing components
-import OrbitingCircles from '@/components/ui/orbiting-circles';
+import OrbitingCircles from '@/app/components/ui/orbiting-circles';
 
 // Importing images
 
@@ -33,38 +33,38 @@ import MysqlIcon from '@/app/images/Database/MySQL.svg';
 import RedisIcon from '@/app/images/Database/Redis.svg';
 
 export default function SkillsSection() {
-  const [frontendRadius, setFrontendRadius] = React.useState(300);
-  const [backendRadius, setBackendRadius] = React.useState(120);
-  const [databaseRadius, setDatabaseRadius] = React.useState(180);
-  const [devopsRadius, setDevopsRadius] = React.useState(240);
+	const [frontendRadius, setFrontendRadius] = React.useState(300);
+	const [backendRadius, setBackendRadius] = React.useState(120);
+	const [databaseRadius, setDatabaseRadius] = React.useState(180);
+	const [devopsRadius, setDevopsRadius] = React.useState(240);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setFrontendRadius(150);
-        setBackendRadius(60);
-        setDatabaseRadius(90);
-        setDevopsRadius(120);
-      } else if (window.innerWidth < 1024) {
-        setFrontendRadius(225);
-        setBackendRadius(90);
-        setDatabaseRadius(135);
-        setDevopsRadius(180);
-      } else {
-        setFrontendRadius(300);
-        setBackendRadius(120);
-        setDatabaseRadius(180);
-        setDevopsRadius(240);
-      }
-    };
-    handleResize();
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 640) {
+				setFrontendRadius(150);
+				setBackendRadius(60);
+				setDatabaseRadius(90);
+				setDevopsRadius(120);
+			} else if (window.innerWidth < 1024) {
+				setFrontendRadius(225);
+				setBackendRadius(90);
+				setDatabaseRadius(135);
+				setDevopsRadius(180);
+			} else {
+				setFrontendRadius(300);
+				setBackendRadius(120);
+				setDatabaseRadius(180);
+				setDevopsRadius(240);
+			}
+		};
+		handleResize();
 
-    window.addEventListener('resize', handleResize);
+		window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 	return (
 		<section id='skills' className='py-20 section'>
 			<div className='container px-8 mx-auto sm:px-16'>

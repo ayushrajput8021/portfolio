@@ -2,11 +2,10 @@ import Image from 'next/image';
 import Github from '@/app/images/github-white.svg';
 import Mail from '@/app/images/mail-white.svg';
 import { Button } from '@nextui-org/button';
-import Particles from '@/components/ui/particles';
+import Particles from '@/app/components/ui/particles';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import GradualSpacing from '@/components/ui/gradual-spacing';
-
+import GradualSpacing from '@/app/components/ui/gradual-spacing';
 
 export default function HeroSection() {
 	const { theme } = useTheme();
