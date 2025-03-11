@@ -18,6 +18,7 @@ const projects = [
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/travel/4-sHMvHXNKqApW1Eo5SQHjtNioeVROXL.png',
 		],
 		tech: ['React', 'JavaScript', 'LocalStorage', 'TailwindCSS'],
+		isVertical: false,
 	},
 	{
 		title: 'Natours',
@@ -30,7 +31,7 @@ const projects = [
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/2-gZOGfiyo4HPWpXRuCdappl6RpJnx99.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/3-NIzfru3t6NCALpKaBebHOsgLnukenS.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/4-ClBEQ4Hqwgg27dbnLFODmLW4ybMi3m.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/5-MtGt9yNZMDQItrenUO2n2g5Kp3CNSa.png',
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/5-MtGt9yNZMDQItrenUO2n2gZKp3CNSa.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/6-sd5jlWQUN138IWoGLA7RWFICdHzrD8.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/7-3My6MSLb1QZtawFSLO0lkU4Qp4YhhQ.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/8-C6b1UIVXNQ2LemUZT99uT1ZRIR9y9E.png',
@@ -38,6 +39,24 @@ const projects = [
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/10-Cpo0pdk9LcudjfqtjX1bsNd1A1H48W.png',
 		],
 		tech: ['Node.js', 'Express', 'MongoDB', 'Stripe', 'Pug', 'CSS'],
+		isVertical: false,
+	},
+	{
+		title: 'Educated Joker Bot',
+		description:
+			'A telegram bot that uses Jokes API to generate jokes and memes and also gives algorithm codes for competitive coding.',
+		url: 'https://t.me/EducatedJokerBot',
+		githubUrl: 'https://github.com/ayushrajput8021/EducatedJokerBot',
+		image: [
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.03%E2%80%AFAM-st7dP2MHWisSeGI4Popmde8Ct2aBAj.png',
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.10%E2%80%AFAM-ZAoO3gygIPCKjyihQS0LZX0WIiaQRY.png',
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.18%E2%80%AFAM-5ml1bkEnfB8s8mRYL0HpaWQ8JqyQxZ.png',
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.26%E2%80%AFAM-6F1DHGleuaJU0tomXkmeSDrw3AOy19.png',
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.45%E2%80%AFAM-kEW0pVxvQCfKA43ULFtduzfdOQ9WwR.png',
+			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.15.00%E2%80%AFAM-J10ZBfIUYWQXXp4It5L5VQKuIR49pU.png',
+		],
+		tech: ['Node.js', 'Telegram Bot API', 'PM2', 'JavaScript'],
+		isVertical: true,
 	},
 ];
 
@@ -65,7 +84,13 @@ export default function ProjectsSection() {
                                       shadow-md hover:shadow-xl
                                       transition-all duration-500 overflow-hidden'
 						>
-							<div className='relative h-[300px] mb-6'>
+							<div
+								className={`relative ${
+									project.isVertical
+										? 'h-[400px] bg-gray-100 dark:bg-gray-900'
+										: 'h-[300px]'
+								} mb-6`}
+							>
 								{project.image.length > 1 ? (
 									<Carousel
 										showThumbs={false}
@@ -77,16 +102,25 @@ export default function ProjectsSection() {
 										className='h-full'
 									>
 										{project.image.map((img, imgIndex) => (
-											<div key={imgIndex} className='h-[300px]'>
+											<div
+												key={imgIndex}
+												className={`${
+													project.isVertical
+														? 'h-[400px] flex items-center justify-center bg-gray-100 dark:bg-gray-900'
+														: 'h-[300px]'
+												}`}
+											>
 												<Image
 													src={img}
 													width={800}
 													height={900}
 													quality={100}
 													alt={`${project.title} image ${imgIndex + 1}`}
-													className='object-cover h-full w-full
-                                                              group-hover:scale-105
-                                                              transition-transform duration-500'
+													className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${
+														project.isVertical
+															? 'object-contain border border-gray-200 dark:border-gray-700 rounded-md'
+															: 'object-cover'
+													}`}
 												/>
 											</div>
 										))}
@@ -97,9 +131,11 @@ export default function ProjectsSection() {
 										alt={project.title}
 										fill
 										quality={100}
-										className='object-cover object-top
-                                                  group-hover:scale-105
-                                                  transition-transform duration-500'
+										className={`transition-transform duration-500 group-hover:scale-105 ${
+											project.isVertical
+												? 'object-contain border border-gray-200 dark:border-gray-700 rounded-md'
+												: 'object-cover object-top'
+										}`}
 									/>
 								)}
 								<a
