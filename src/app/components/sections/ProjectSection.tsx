@@ -44,7 +44,7 @@ const projects = [
 	{
 		title: 'Educated Joker Bot',
 		description:
-			'A telegram bot that uses Jokes API to generate jokes and memes and also gives algorithm codes for competitive coding.',
+			'A Telegram bot that delivers jokes and algorithm explanations with AI-powered content generation.',
 		url: 'https://t.me/EducatedJokerBot',
 		githubUrl: 'https://github.com/ayushrajput8021/EducatedJokerBot',
 		image: [
@@ -55,7 +55,15 @@ const projects = [
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.45%E2%80%AFAM-kEW0pVxvQCfKA43ULFtduzfdOQ9WwR.png',
 			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.15.00%E2%80%AFAM-J10ZBfIUYWQXXp4It5L5VQKuIR49pU.png',
 		],
-		tech: ['Node.js', 'Telegram Bot API', 'PM2', 'JavaScript'],
+		tech: [
+			'Node.js',
+			'Telegram Bot API',
+			'Gemini API',
+			'JavaScript',
+			'PM2',
+			'Telegraf.js',
+			'Gemini 2.0 Flash Lite',
+		],
 		isVertical: true,
 	},
 ];
