@@ -19,6 +19,7 @@ const projects = [
 		],
 		tech: ['React', 'JavaScript', 'LocalStorage', 'TailwindCSS'],
 		isVertical: false,
+		priority:3,
 	},
 	{
 		title: 'Natours',
@@ -40,6 +41,7 @@ const projects = [
 		],
 		tech: ['Node.js', 'Express', 'MongoDB', 'Stripe', 'Pug', 'CSS'],
 		isVertical: false,
+		priority:2,
 	},
 	{
 		title: 'Educated Joker Bot',
@@ -65,6 +67,7 @@ const projects = [
 			'Gemini 2.0 Flash Lite',
 		],
 		isVertical: true,
+		priority:1,
 	},
 ];
 
@@ -84,7 +87,9 @@ export default function ProjectsSection() {
 					My Projects
 				</h2>
 				<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-					{projects.map((project, index) => (
+					{projects
+						.sort((a, b) => a.priority - b.priority)
+						.map((project, index) => (
 						<div
 							key={index}
 							className='group bg-white dark:bg-[#101010] rounded-xl

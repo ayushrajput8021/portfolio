@@ -11,12 +11,12 @@ export default function ExperienceSection() {
 			type: 'Freelance',
 			location: 'Remote',
 			description:
-				'Developed a backend-focused tour booking platform with a Stripe payment gateway for secure transactions.',
+				'Enhanced a full-stack application by optimizing database and code performance for scalability while initiating landing page development.',
 			subDescriptions: [
-				'Designed and implemented RESTful APIs using Node.js and Express.',
-				'Integrated MongoDB for efficient data storage and retrieval.',
-				'Set up self-hosting on AWS EC2 with Docker and Nginx reverse proxy.',
-				'Styled frontend with Pug templates and custom CSS.',
+				'Database Migration: Migrated PostgreSQL to use the Drizzle ORM, improving database efficiency and maintainability.',
+				'Front-End Optimization: Improved React code to efficiently handle large datasets, enhancing performance and user experience.',
+				'Back-End Refactoring: Refactored Node.js code to manage increased data volume, ensuring scalability and reliability.',
+				'Landing Page Development: Currently designing and building the product’s landing page to support marketing and user engagement.',
 			],
 		},
 		{
@@ -25,11 +25,12 @@ export default function ExperienceSection() {
 			type: 'Freelance',
 			location: 'Remote',
 			description:
-				'Created a simple travel list application to track destinations.',
+				'Developed and deployed a full-stack financial dashboard and user management system with comprehensive documentation.',
 			subDescriptions: [
-				'Built the UI with React and styled it using TailwindCSS.',
-				'Implemented LocalStorage for persistent data storage.',
-				'Deployed on Vercel with custom domain mapping via CNAME.',
+				'Front-End Development: Converted Figma designs into functional React code, creating an interactive financial dashboard and user management interface.',
+				'Back-End Development: Built a Node.js backend integrated with PostgreSQL to support data management and application functionality.',
+				'Deployment: Successfully deployed the entire application on the client’s virtual machine, ensuring operational readiness.',
+				'Documentation: Created detailed documentation, including configuration, manual, dependencies, and database guides, to support client use and maintenance.',
 			],
 		},
 		{
@@ -38,12 +39,12 @@ export default function ExperienceSection() {
 			type: 'On-site',
 			location: 'Delhi, India', // Updated to include On-site
 			description:
-				'Worked on various client projects through Upwork, focusing on full-stack development.',
+				'Developed and deployed a full-stack eCommerce platform with integrated payment processing, automated communication systems, and robust cloud infrastructure.',
 			subDescriptions: [
-				'Developed responsive web applications using React and Node.js.',
-				'Collaborated with clients to deliver tailored solutions.',
-				'Optimized performance and ensured cross-browser compatibility.',
-				'Occasionally worked on-site for specific client requirements.',
+				'Deployed applications on Azure VM using Docker, established CI/CD pipelines, and configured Nginx as a reverse proxy for different services, ensuring efficient and reliable deployment.',
+				'Integrated WhatsApp API into the application to facilitate automated user responses and enhance communication efficiency.',
+				'Implemented Razorpay for seamless monthly subscription management and payment processing, optimizing the user experience.',
+				'Developed a robust Node.js backend with PostgreSQL for an eCommerce platform, ensuring high performance and reliable data handling.',
 			],
 		},
 	];
