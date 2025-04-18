@@ -12,11 +12,8 @@ import {
 } from './appwrite';
 import { Query } from 'appwrite';
 
-// Store active section views in memory
-const activeSectionViews: Record<
-	string,
-	{ sessionId: string; enterTime: Date }
-> = {};
+// Remove activeSectionViews, no longer needed for this approach
+// const activeSectionViews: Record<string, { sessionId: string; enterTime: Date }> = {};
 
 // Session management
 const getSessionId = (): string => {
@@ -106,18 +103,10 @@ const endSession = async (): Promise<void> => {
 			totalTime,
 		});
 
-		// End any active section views that are still open
-		const activeKeys = Object.keys(activeSectionViews);
-		for (const sectionId of activeKeys) {
-			await endSectionView(sectionId, endedAt, true); // Pass flag to force send
-		}
-
 		// Clear local storage related to the session
 		localStorage.removeItem('portfolio_session_id');
 		localStorage.removeItem('portfolio_session_started');
 		localStorage.removeItem('portfolio_scroll_depth');
-		// Note: We don't clear individual section view items from localStorage here
-		// as endSectionView handles its own cleanup.
 	} catch (error) {
 		console.error('Error ending session:', error);
 	}
@@ -139,60 +128,42 @@ const updateScrollDepth = async (depth: number): Promise<void> => {
 	}
 };
 
-// Section view tracking
-const trackSectionView = (sectionId: string, enterTime: Date): void => {
-	const sessionId = getSessionId();
-	console.log(`Tracking enter: ${sectionId} at ${enterTime}`);
-	activeSectionViews[sectionId] = { sessionId, enterTime };
-};
-
-const endSectionView = async (
+// New function to track section view duration (replaces track/endSectionView)
+const trackSectionViewDuration = async (
 	sectionId: string,
-	exitTime: Date,
-	forceSend: boolean = false // Flag to send even if time < 3s during session end
+	enterTime: Date,
+	duration: number // Duration in seconds
 ): Promise<void> => {
-	const activeView = activeSectionViews[sectionId];
-	if (!activeView) {
-		// console.log(`No active view found for exit: ${sectionId}`);
-		return;
-	}
+	const sessionId = getSessionId();
+	if (!sessionId || duration < 0) return; // Basic validation
 
-	console.log(`Tracking exit: ${sectionId} at ${exitTime}`);
+	const exitTime = new Date(enterTime.getTime() + duration * 1000);
 
-	const { sessionId, enterTime } = activeView;
-	const timeSpent = Math.round(
-		(exitTime.getTime() - enterTime.getTime()) / 1000
-	);
+	const sectionViewData: SectionView = {
+		sessionId,
+		sectionId,
+		enterTime,
+		exitTime,
+		timeSpent: duration,
+	};
 
-	// Remove the view from active tracking *before* sending data
-	delete activeSectionViews[sectionId];
-
-	// Only send if time spent is >= 3 seconds OR if we are forcing send on session end
-	if (timeSpent >= 3 || forceSend) {
-		const sectionViewData: SectionView = {
-			sessionId,
-			sectionId,
-			enterTime,
-			exitTime,
-			timeSpent: timeSpent < 0 ? 0 : timeSpent, // Ensure timeSpent is not negative
-		};
-
-		try {
-			console.log('Sending section view data:', sectionViewData);
-			await databases.createDocument(
-				ANALYTICS_DATABASE_ID,
-				SECTION_VIEWS_COLLECTION_ID,
-				ID.unique(),
-				sectionViewData
-			);
-			console.log('Section view data sent successfully.');
-		} catch (error) {
-			console.error('Error sending section view data:', error, sectionViewData);
-			// Optional: Consider adding the failed view back to try later, or implement retry logic
-		}
-	} else {
+	try {
 		console.log(
-			`Section view for ${sectionId} skipped (duration: ${timeSpent}s < 3s)`
+			'[Analytics Service] Sending section view data:',
+			sectionViewData
+		);
+		await databases.createDocument(
+			ANALYTICS_DATABASE_ID,
+			SECTION_VIEWS_COLLECTION_ID,
+			ID.unique(),
+			sectionViewData
+		);
+		console.log('[Analytics Service] Section view data sent successfully.');
+	} catch (error) {
+		console.error(
+			'[Analytics Service] Error sending section view data:',
+			error,
+			sectionViewData
 		);
 	}
 };
@@ -229,8 +200,7 @@ const trackProjectLinkClick = async (
 export const analyticsService = {
 	getSessionId,
 	updateScrollDepth,
-	trackSectionView,
-	endSectionView,
+	trackSectionViewDuration,
 	endSession,
 	trackProjectLinkClick,
 };

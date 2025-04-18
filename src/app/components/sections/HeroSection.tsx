@@ -1,5 +1,5 @@
 import { Button } from '@nextui-org/button';
-import Particles from '@/app/components/ui/particles';
+import { Particles } from '@/app/components/ui/particles';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { GithubIcon } from '@/app/components/Icons/GithubIcon';
