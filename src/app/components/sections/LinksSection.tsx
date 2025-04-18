@@ -7,8 +7,11 @@ import {
 	TWITTER_URL,
 	UPWORK_URL,
 } from '@/app/utils/constants';
+import { useTrackSection } from '@/app/hooks/useTrackSection';
+import { SectionId } from '@/app/services/appwrite';
 
 export default function LinksSection() {
+	const sectionRef = useTrackSection({ sectionId: SectionId.LINKS });
 	const links = [
 		{
 			href: GITHUB_URL,
@@ -51,6 +54,7 @@ export default function LinksSection() {
 	return (
 		<section
 			id='links'
+			ref={sectionRef}
 			className='py-20 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
 		>
 			<div className='flex flex-col items-center justify-center gap-12 px-4 max-w-4xl mx-auto'>

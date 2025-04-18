@@ -6,17 +6,23 @@ import { GithubIcon } from '@/app/components/Icons/GithubIcon';
 import GradualSpacing from '@/app/components/ui/gradual-spacing';
 import { GmailIcon } from '@/app/components/Icons/GmailIcon';
 import { GITHUB_URL, GMAIL_URL } from '@/app/utils/constants';
+import { useTrackSection } from '@/app/hooks/useTrackSection';
+import { SectionId } from '@/app/services/appwrite';
 
 export default function HeroSection() {
 	const { theme } = useTheme();
 	const [color, setColor] = useState('#ffffff');
+	const sectionRef = useTrackSection({ sectionId: SectionId.HERO });
 
 	useEffect(() => {
 		setColor(theme === 'dark' ? '#ffffff' : '#0a0a0a');
 	}, [theme]);
 
 	return (
-		<section className='flex items-center justify-center min-h-screen relative'>
+		<section
+			ref={sectionRef}
+			className='flex items-center justify-center min-h-screen relative'
+		>
 			<div className='text-center max-w-5xl mx-auto px-4'>
 				<GradualSpacing
 					className='text-center text-4xl font-bold -tracking-wider text-black

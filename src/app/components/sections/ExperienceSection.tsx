@@ -1,7 +1,10 @@
 'use client';
 import { useTheme } from 'next-themes';
+import { useTrackSection } from '@/app/hooks/useTrackSection';
+import { SectionId } from '@/app/services/appwrite';
 
 export default function ExperienceSection() {
+	const sectionRef = useTrackSection({ sectionId: SectionId.EXPERIENCE });
 	const { theme } = useTheme();
 
 	const experiences = [
@@ -16,7 +19,7 @@ export default function ExperienceSection() {
 				'Database Migration: Migrated PostgreSQL to use the Drizzle ORM, improving database efficiency and maintainability.',
 				'Front-End Optimization: Improved React code to efficiently handle large datasets, enhancing performance and user experience.',
 				'Back-End Refactoring: Refactored Node.js code to manage increased data volume, ensuring scalability and reliability.',
-				'Landing Page Development: Currently designing and building the product’s landing page to support marketing and user engagement.',
+				"Landing Page Development: Currently designing and building the product's landing page to support marketing and user engagement.",
 			],
 		},
 		{
@@ -29,7 +32,7 @@ export default function ExperienceSection() {
 			subDescriptions: [
 				'Front-End Development: Converted Figma designs into functional React code, creating an interactive financial dashboard and user management interface.',
 				'Back-End Development: Built a Node.js backend integrated with PostgreSQL to support data management and application functionality.',
-				'Deployment: Successfully deployed the entire application on the client’s virtual machine, ensuring operational readiness.',
+				"Deployment: Successfully deployed the entire application on the client's virtual machine, ensuring operational readiness.",
 				'Documentation: Created detailed documentation, including configuration, manual, dependencies, and database guides, to support client use and maintenance.',
 			],
 		},
@@ -52,6 +55,7 @@ export default function ExperienceSection() {
 	return (
 		<section
 			id='experience'
+			ref={sectionRef}
 			className='py-20 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
 		>
 			<div className='container px-4 sm:px-6 lg:px-8 mx-auto max-w-5xl'>

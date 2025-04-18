@@ -1,10 +1,16 @@
 import Image from 'next/image';
 import Avatar from '@/app/images/avatar.jpeg';
+import React from 'react';
+import { useTrackSection } from '@/app/hooks/useTrackSection';
+import { SectionId } from '@/app/services/appwrite';
 
 export default function AboutSection() {
+	const sectionRef = useTrackSection({ sectionId: SectionId.ABOUT });
+
 	return (
 		<section
 			id='about'
+			ref={sectionRef}
 			className='py-24 bg-white dark:bg-[#080808] transition-colors duration-300'
 		>
 			<div className='container mx-auto px-4 md:px-8 max-w-6xl'>

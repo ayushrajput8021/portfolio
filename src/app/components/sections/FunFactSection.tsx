@@ -1,11 +1,16 @@
 'use client';
+import React from 'react';
 import { useTheme } from 'next-themes';
+import { useTrackSection } from '@/app/hooks/useTrackSection';
+import { SectionId } from '@/app/services/appwrite';
 
 export default function FunFactSection() {
 	const { theme } = useTheme();
+	const sectionRef = useTrackSection({ sectionId: SectionId.FUN_FACTS });
 
 	return (
 		<section
+			ref={sectionRef}
 			id='funfact'
 			className='py-20 bg-gray-100 dark:bg-[#050505] transition-colors duration-300'
 		>
