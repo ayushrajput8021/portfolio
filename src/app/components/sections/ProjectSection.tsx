@@ -21,6 +21,8 @@ interface Project {
 	priority: number;
 	type: ProjectType;
 	status?: 'live' | 'building' | 'completed';
+	isFeatured: boolean;
+	wantToShow: boolean;
 }
 
 // Project data with added tech stacks and types
@@ -42,6 +44,8 @@ const projects: Project[] = [
 		priority: 3,
 		type: 'Frontend Projects',
 		status: 'live',
+		isFeatured: true,
+		wantToShow: true,
 	},
 	{
 		title: 'Natours',
@@ -66,6 +70,8 @@ const projects: Project[] = [
 		priority: 2,
 		type: 'Backend Projects',
 		status: 'live',
+		isFeatured: true,
+		wantToShow: true,
 	},
 	{
 		title: 'Educated Joker Bot',
@@ -94,6 +100,8 @@ const projects: Project[] = [
 		priority: 1,
 		type: 'Backend Projects',
 		status: 'live',
+		isFeatured: true,
+		wantToShow: true,
 	},
 ];
 
