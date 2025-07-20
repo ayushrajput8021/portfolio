@@ -10,7 +10,7 @@ import AwsIcon from '@/app/images/Devops/AWS.svg';
 import NginxIcon from '@/app/images/Devops/NGINX.svg';
 import VercelIcon from '@/app/images/Devops/Vercel.svg';
 import DockerIcon from '@/app/images/Devops/Docker.svg';
-import AzureIcon from '@/app/images/Devops/Azure.svg';
+import AzureIcon from '@/app/images/Devops/azure.svg';
 
 // Importing frontend images
 import ReactIcon from '@/app/images/Frontend/React.svg';
@@ -25,7 +25,7 @@ import NodeIcon from '@/app/images/Backend/Node.js.svg';
 import ExpressIcon from '@/app/images/Backend/express-js.svg';
 import FlaskIcon from '@/app/images/Backend/Flask.svg';
 import PythonIcon from '@/app/images/Backend/python.svg';
-import FastApiIcon from '@/app/images/Backend/fastapi.svg';
+import FastApiIcon from '@/app/images/Backend/Fastapi.svg';
 
 // Importing database images
 import MongodbIcon from '@/app/images/Database/MongoDB.svg';
