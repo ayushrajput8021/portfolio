@@ -5,11 +5,14 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useTrackSection } from '@/app/hooks/useTrackSection';
 import { SectionId } from '@/app/services/appwrite';
 import { analyticsService } from '@/app/services/analytics';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { projects } from '@/app/data/projects';
 
 // Project types
-export type ProjectType = 'Backend Projects' | 'Frontend Projects';
+export type ProjectType =
+	| 'Backend Projects'
+	| 'Frontend Projects'
+	| 'Full Stack Projects';
 
 export interface Project {
 	title: string;
@@ -26,11 +29,174 @@ export interface Project {
 	wantToShow: boolean;
 }
 
+// Modal component for image carousel
+function ImageModal({
+	isOpen,
+	onClose,
+	project,
+}: {
+	isOpen: boolean;
+	onClose: () => void;
+	project: Project | null;
+}) {
+	useEffect(() => {
+		const handleEscape = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				onClose();
+			}
+		};
 
+		if (isOpen) {
+			document.addEventListener('keydown', handleEscape);
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'unset';
+		}
+
+		return () => {
+			document.removeEventListener('keydown', handleEscape);
+			document.body.style.overflow = 'unset';
+		};
+	}, [isOpen, onClose]);
+
+	if (!isOpen || !project) return null;
+
+	return (
+		<div
+			className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-2 sm:p-4'
+			onClick={onClose}
+		>
+			<div
+				className='relative w-full max-w-7xl max-h-[95vh] bg-white dark:bg-gray-900 rounded-lg overflow-hidden'
+				onClick={(e) => e.stopPropagation()}
+			>
+				{/* Close button */}
+				<button
+					onClick={onClose}
+					className='absolute top-4 right-4 z-10 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-70 transition-all duration-200'
+				>
+					<svg
+						className='w-6 h-6'
+						fill='none'
+						stroke='currentColor'
+						viewBox='0 0 24 24'
+					>
+						<path
+							strokeLinecap='round'
+							strokeLinejoin='round'
+							strokeWidth={2}
+							d='M6 18L18 6M6 6l12 12'
+						/>
+					</svg>
+				</button>
+
+				{/* Project title */}
+				<div className='absolute top-4 left-4 z-10 bg-black bg-opacity-50 text-white px-3 py-1 rounded'>
+					<h3 className='font-semibold'>{project.title}</h3>
+				</div>
+
+				{/* Carousel */}
+				<div className='h-full max-h-[95vh]'>
+					{project.image.length > 1 ? (
+						<Carousel
+							showThumbs={false}
+							autoPlay={false}
+							infiniteLoop
+							showArrows={true}
+							showStatus={true}
+							showIndicators={true}
+							className='h-full'
+							renderArrowPrev={(onClickHandler, hasPrev) =>
+								hasPrev && (
+									<button
+										type='button'
+										onClick={onClickHandler}
+										className='absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-70 transition-all duration-200'
+									>
+										<svg
+											className='w-6 h-6'
+											fill='none'
+											stroke='currentColor'
+											viewBox='0 0 24 24'
+										>
+											<path
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												strokeWidth={2}
+												d='M15 19l-7-7 7-7'
+											/>
+										</svg>
+									</button>
+								)
+							}
+							renderArrowNext={(onClickHandler, hasNext) =>
+								hasNext && (
+									<button
+										type='button'
+										onClick={onClickHandler}
+										className='absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-black bg-opacity-50 text-white rounded-full hover:bg-opacity-70 transition-all duration-200'
+									>
+										<svg
+											className='w-6 h-6'
+											fill='none'
+											stroke='currentColor'
+											viewBox='0 0 24 24'
+										>
+											<path
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												strokeWidth={2}
+												d='M9 5l7 7-7 7'
+											/>
+										</svg>
+									</button>
+								)
+							}
+						>
+							{project.image.map((img, imgIndex) => (
+								<div
+									key={imgIndex}
+									className='flex items-center justify-center bg-gray-100 dark:bg-gray-800'
+									style={{ maxHeight: '95vh' }}
+								>
+									<Image
+										src={img}
+										width={1400}
+										height={1000}
+										quality={100}
+										alt={`${project.title} image ${imgIndex + 1}`}
+										className={`max-h-[95vh] w-auto ${
+											project.isVertical ? 'object-contain' : 'object-contain'
+										}`}
+									/>
+								</div>
+							))}
+						</Carousel>
+					) : (
+						<div className='flex items-center justify-center h-full bg-gray-100 dark:bg-gray-800'>
+							<Image
+								src={project.image[0]}
+								width={1400}
+								height={1000}
+								quality={100}
+								alt={project.title}
+								className={`max-h-[95vh] w-auto ${
+									project.isVertical ? 'object-contain' : 'object-contain'
+								}`}
+							/>
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
+	);
+}
 
 export default function ProjectSection() {
 	const sectionRef = useTrackSection({ sectionId: SectionId.PROJECTS });
 	const [selectedType, setSelectedType] = useState<ProjectType | 'All'>('All');
+	const [modalProject, setModalProject] = useState<Project | null>(null);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	// Get unique project types that have actual projects
 	const projectTypes: ProjectType[] = Array.from(
@@ -49,6 +215,18 @@ export default function ProjectSection() {
 		linkType: 'visit' | 'github' | 'star' | 'fork'
 	) => {
 		analyticsService.trackProjectLinkClick(projectId, linkType);
+	};
+
+	// Handle image click to open modal
+	const handleImageClick = (project: Project) => {
+		setModalProject(project);
+		setIsModalOpen(true);
+	};
+
+	// Handle modal close
+	const handleModalClose = () => {
+		setIsModalOpen(false);
+		setModalProject(null);
 	};
 
 	return (
@@ -115,7 +293,8 @@ export default function ProjectSection() {
 										project.isVertical
 											? 'h-[400px] bg-gray-100 dark:bg-gray-900'
 											: 'h-[300px]'
-									} mb-6`}
+									} mb-6 cursor-pointer`}
+									onClick={() => handleImageClick(project)}
 								>
 									{project.status === 'building' && (
 										<div className='absolute inset-0 bg-gray-800/50 dark:bg-gray-900/70 flex items-center justify-center z-10'>
@@ -125,6 +304,31 @@ export default function ProjectSection() {
 											</div>
 										</div>
 									)}
+
+									{/* Hover overlay for image click */}
+									<div className='absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center z-5'>
+										<div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+											<svg
+												className='w-12 h-12 text-white'
+												fill='none'
+												stroke='currentColor'
+												viewBox='0 0 24 24'
+											>
+												<path
+													strokeLinecap='round'
+													strokeLinejoin='round'
+													strokeWidth={2}
+													d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
+												/>
+												<path
+													strokeLinecap='round'
+													strokeLinejoin='round'
+													strokeWidth={2}
+													d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'
+												/>
+											</svg>
+										</div>
+									</div>
 
 									{project.image.length > 1 && project.status !== 'building' ? (
 										<Carousel
@@ -179,11 +383,15 @@ export default function ProjectSection() {
 											href={project.url}
 											target='_blank'
 											rel='noopener noreferrer'
+											onClick={(e) => {
+												e.stopPropagation(); // Prevent modal from opening
+												handleLinkClick(project.title, 'visit');
+											}}
 											className='absolute top-4 right-4 p-2 bg-gray-800/70
 														  dark:bg-gray-900/70 rounded-full
 														  hover:bg-gray-700 dark:hover:bg-gray-800
 														  transition-all duration-300 opacity-0
-														  group-hover:opacity-100'
+														  group-hover:opacity-100 z-10'
 										>
 											<svg
 												className='w-5 h-5 text-white'
@@ -352,6 +560,13 @@ export default function ProjectSection() {
 						))}
 				</div>
 			</div>
+
+			{/* Image Modal */}
+			<ImageModal
+				isOpen={isModalOpen}
+				onClose={handleModalClose}
+				project={modalProject}
+			/>
 		</section>
 	);
 }
