@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Avatar from '@/app/images/avatar.jpeg';
+
 import React from 'react';
 import { useTrackSection } from '@/app/hooks/useTrackSection';
 import { SectionId } from '@/app/services/appwrite';
@@ -24,13 +24,15 @@ export default function AboutSection() {
                                      transition-all duration-500 ease-out'
 						/>
 						<Image
-							src={Avatar}
+							src={
+								'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/Mine-ghibili.png'
+							}
 							alt='Profile picture'
 							className='relative rounded-2xl object-cover w-full h-auto shadow-xl
                                      grayscale hover:grayscale-0 transition-all duration-500
                                      group-hover:shadow-2xl group-hover:scale-[1.02]'
-							width={400}
-							height={500}
+							width={450}
+							height={400}
 							priority
 						/>
 					</div>
@@ -99,7 +101,7 @@ export default function AboutSection() {
                                                      transition-colors duration-300
                                                      group-hover:text-gray-800 dark:group-hover:text-gray-100'
 										>
-											1+ Years
+											1.5+ Years
 										</p>
 										<p
 											className='text-sm text-gray-500 dark:text-gray-400
@@ -140,7 +142,7 @@ export default function AboutSection() {
                                                      transition-colors duration-300
                                                      group-hover:text-gray-800 dark:group-hover:text-gray-100'
 										>
-											5+ Projects
+											8+ Projects
 										</p>
 										<p
 											className='text-sm text-gray-500 dark:text-gray-400
