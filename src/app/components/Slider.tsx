@@ -7,8 +7,14 @@ type props = {
 export default function Slide({ children }: props) {
 	return (
 		<motion.div
-			initial={{ opacity: 0, translateX: -100 }}
-			whileInView={{ opacity: 1, translateX: 0 }}
+			initial={{
+				opacity: 0,
+				translateX: '-15vw', // Use viewport width units - responsive to screen size
+			}}
+			whileInView={{
+				opacity: 1,
+				translateX: 0,
+			}}
 			transition={{ duration: 0.5 }}
 			viewport={{ once: true, amount: 0.25 }}
 		>

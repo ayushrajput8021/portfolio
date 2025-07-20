@@ -78,7 +78,7 @@ export default function Home() {
 	return (
 		<div className='bg-background'>
 			<motion.div
-				className='fixed top-0 left-0 right-0 h-[1.4px] bg-[#f0f0f0] origin-[0%]'
+				className='fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400 origin-[0%] z-50'
 				style={{ scaleX: scrollYProgress }}
 			/>
 			<main className='flex flex-col flex-grow relative'>
