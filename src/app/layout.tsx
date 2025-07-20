@@ -23,6 +23,13 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en' suppressHydrationWarning>
+			<head>
+				<script
+					defer
+					src='https://cloud.umami.is/script.js'
+					data-website-id='895fa928-e1bd-4626-9bad-2af0d108c567'
+				></script>
+			</head>
 			<body className={`${nunito.className} antialiased`}>
 				<ThemeProvider attribute='class' defaultTheme='light' enableColorScheme>
 					<AnalyticsProvider>{children}</AnalyticsProvider>

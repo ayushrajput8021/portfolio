@@ -57,4 +57,5 @@ export enum SectionId {
 	SKILLS = 'skills',
 	FUN_FACTS = 'funFacts',
 	LINKS = 'links',
+	CONTACT = 'contact',
 }

@@ -9,9 +9,86 @@ import {
 } from '@/app/utils/constants';
 import { useTrackSection } from '@/app/hooks/useTrackSection';
 import { SectionId } from '@/app/services/appwrite';
+import { useState } from 'react';
 
-export default function LinksSection() {
-	const sectionRef = useTrackSection({ sectionId: SectionId.LINKS });
+// Platform-specific button styling function
+const getLinkButtonStyles = (platform: string) => {
+	const styles = {
+		container: '',
+		icon: '',
+		text: '',
+	};
+
+	switch (platform) {
+		case 'GitHub':
+			styles.container =
+				'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-800 dark:hover:border-gray-300';
+			styles.icon =
+				'text-gray-800 dark:text-gray-200 group-hover:text-black dark:group-hover:text-white';
+			styles.text =
+				'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white';
+			break;
+		case 'LinkedIn':
+			styles.container =
+				'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/50 hover:border-blue-400 dark:hover:border-blue-600';
+			styles.icon =
+				'text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300';
+			styles.text =
+				'text-blue-700 dark:text-blue-300 group-hover:text-blue-800 dark:group-hover:text-blue-200';
+			break;
+		case 'Gmail':
+			styles.container =
+				'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/50 hover:border-red-400 dark:hover:border-red-600';
+			styles.icon =
+				'text-red-600 dark:text-red-400 group-hover:text-red-700 dark:group-hover:text-red-300';
+			styles.text =
+				'text-red-700 dark:text-red-300 group-hover:text-red-800 dark:group-hover:text-red-200';
+			break;
+		case 'Twitter':
+			styles.container =
+				'bg-sky-50 dark:bg-sky-950/30 border-sky-200 dark:border-sky-800 hover:bg-sky-100 dark:hover:bg-sky-900/50 hover:border-sky-400 dark:hover:border-sky-600';
+			styles.icon =
+				'text-sky-600 dark:text-sky-400 group-hover:text-sky-700 dark:group-hover:text-sky-300';
+			styles.text =
+				'text-sky-700 dark:text-sky-300 group-hover:text-sky-800 dark:group-hover:text-sky-200';
+			break;
+		case 'Upwork':
+			styles.container =
+				'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/50 hover:border-green-400 dark:hover:border-green-600';
+			styles.icon =
+				'text-green-600 dark:text-green-400 group-hover:text-green-700 dark:group-hover:text-green-300';
+			styles.text =
+				'text-green-700 dark:text-green-300 group-hover:text-green-800 dark:group-hover:text-green-200';
+			break;
+		case 'Resume':
+			styles.container =
+				'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-800 hover:bg-purple-100 dark:hover:bg-purple-900/50 hover:border-purple-400 dark:hover:border-purple-600';
+			styles.icon =
+				'text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300';
+			styles.text =
+				'text-purple-700 dark:text-purple-300 group-hover:text-purple-800 dark:group-hover:text-purple-200';
+			break;
+		default:
+			styles.container =
+				'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800';
+			styles.icon =
+				'text-gray-600 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-gray-200';
+			styles.text =
+				'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white';
+	}
+
+	return styles;
+};
+
+export default function ContactSection() {
+	const sectionRef = useTrackSection({ sectionId: SectionId.CONTACT });
+	const [formData, setFormData] = useState({
+		name: '',
+		email: '',
+		message: '',
+	});
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
 	const links = [
 		{
 			href: GITHUB_URL,
@@ -51,43 +128,179 @@ export default function LinksSection() {
 		},
 	];
 
+	const handleInputChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setIsSubmitting(true);
+
+		// For now, just mailto functionality
+		const subject = encodeURIComponent(`Contact from ${formData.name}`);
+		const body = encodeURIComponent(
+			`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+		);
+		window.open(`mailto:${GMAIL_URL}?subject=${subject}&body=${body}`);
+
+		// Reset form
+		setFormData({ name: '', email: '', message: '' });
+		setIsSubmitting(false);
+	};
+
 	return (
 		<section
-			id='links'
+			id='contact'
 			ref={sectionRef}
 			className='py-20 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
 		>
-			<div className='flex flex-col items-center justify-center gap-12 px-4 max-w-4xl mx-auto'>
+			<div className='container mx-auto px-4 md:px-8 max-w-6xl'>
 				<h2
-					className='text-3xl md:text-4xl font-semibold text-center font-space-mono
+					className='text-3xl md:text-4xl font-bold text-center font-space-mono
                      text-gray-900 dark:text-gray-100 hover:text-gray-800 dark:hover:text-gray-50
-                     transition-colors duration-300'
+                     transition-colors duration-300 mb-12'
 				>
-					Connect With Me
+					Contact Me
 				</h2>
-				<nav className='grid sm:grid-cols-2 grid-cols-2 md:grid-cols-3 gap-4 w-10%'>
-					{links.map((link, index) => (
-						<a
-							key={index}
-							href={link.title === 'Gmail' ? `mailto:${link.href}` : link.href}
-							className='group flex items-center gap-3 p-4 rounded-xl
-                   bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800
-                       shadow-sm hover:shadow-lg hover:-translate-y-1
-                       transition-all duration-300 transform'
-							target='_blank'
-							rel='noopener noreferrer'
-						>
-							<span className='flex-shrink-0'>{link.icon}</span>
-							<span
-								className='text-lg font-medium text-gray-700 dark:text-gray-300
-                          group-hover:text-transparent bg-clip-text bg-gradient-to-r
-                          from-blue-600 to-purple-600 transition-all duration-300'
+
+				<div className='grid lg:grid-cols-2 gap-12 items-start'>
+					{/* Contact Form */}
+					<div className='bg-white dark:bg-[#101010] rounded-xl border border-gray-200/50 dark:border-gray-800/50 shadow-md hover:shadow-xl transition-all duration-500 p-8'>
+						<h3 className='text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6'>
+							Send me a message
+						</h3>
+						<form onSubmit={handleSubmit} className='space-y-6'>
+							<div>
+								<label
+									htmlFor='name'
+									className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'
+								>
+									Name
+								</label>
+								<input
+									type='text'
+									id='name'
+									name='name'
+									value={formData.name}
+									onChange={handleInputChange}
+									required
+									className='w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg
+									         bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100
+									         focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
+									         transition-all duration-300 hover:border-gray-400 dark:hover:border-gray-600'
+									placeholder='Your Name'
+								/>
+							</div>
+
+							<div>
+								<label
+									htmlFor='email'
+									className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'
+								>
+									Email
+								</label>
+								<input
+									type='email'
+									id='email'
+									name='email'
+									value={formData.email}
+									onChange={handleInputChange}
+									required
+									className='w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg
+									         bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100
+									         focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
+									         transition-all duration-300 hover:border-gray-400 dark:hover:border-gray-600'
+									placeholder='your.email@example.com'
+								/>
+							</div>
+
+							<div>
+								<label
+									htmlFor='message'
+									className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2'
+								>
+									Message
+								</label>
+								<textarea
+									id='message'
+									name='message'
+									value={formData.message}
+									onChange={handleInputChange}
+									required
+									rows={5}
+									className='w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg
+									         bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100
+									         focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent
+									         transition-all duration-300 hover:border-gray-400 dark:hover:border-gray-600
+									         resize-vertical'
+									placeholder='Your message...'
+								/>
+							</div>
+
+							<button
+								type='submit'
+								disabled={isSubmitting}
+								className='w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600
+								         text-white font-semibold py-3 px-6 rounded-lg
+								         transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg
+								         disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none'
 							>
-								{link.label}
-							</span>
-						</a>
-					))}
-				</nav>
+								{isSubmitting ? 'Sending...' : 'Send Message'}
+							</button>
+						</form>
+					</div>
+
+					{/* Links Section */}
+					<div className='space-y-8'>
+						<div>
+							<h3 className='text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6'>
+								Connect with me
+							</h3>
+							<p className='text-gray-600 dark:text-gray-400 mb-8 leading-relaxed'>
+								Feel free to reach out through any of these platforms. I&apos;m
+								always open to discussing new opportunities, collaborations, or
+								just having a chat about technology and development.
+							</p>
+						</div>
+
+						<div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+							{links.map((link, index) => {
+								const buttonStyles = getLinkButtonStyles(link.title);
+								return (
+									<a
+										key={index}
+										href={
+											link.title === 'Gmail' ? `mailto:${link.href}` : link.href
+										}
+										className={`group flex items-center gap-3 p-4 rounded-xl border
+										           shadow-sm hover:shadow-lg hover:-translate-y-1
+										           transition-all duration-300 transform
+										           ${buttonStyles.container}`}
+										target='_blank'
+										rel='noopener noreferrer'
+									>
+										<span
+											className={`flex-shrink-0 transition-all duration-300 ${buttonStyles.icon}`}
+										>
+											{link.icon}
+										</span>
+										<span
+											className={`text-lg font-medium transition-all duration-300 ${buttonStyles.text}`}
+										>
+											{link.label}
+										</span>
+									</a>
+								);
+							})}
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	);

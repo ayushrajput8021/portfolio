@@ -14,7 +14,7 @@ const AboutSection = dynamic(
 const SkillsSection = dynamic(
 	() => import('./components/sections/SkillSectionV2')
 );
-const LinksSection = dynamic(
+const ContactSection = dynamic(
 	() => import('./components/sections/LinksSection')
 );
 const ProjectsSection = dynamic(
@@ -100,7 +100,7 @@ export default function Home() {
 					<SkillsSection />
 				</Slide>
 				<Slide>
-					<LinksSection />
+					<ContactSection />
 				</Slide>
 				<Slide>
 					<ProjectsSection />
