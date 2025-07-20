@@ -6,11 +6,12 @@ import { useTrackSection } from '@/app/hooks/useTrackSection';
 import { SectionId } from '@/app/services/appwrite';
 import { analyticsService } from '@/app/services/analytics';
 import { useState } from 'react';
+import { projects } from '@/app/data/projects';
 
 // Project types
 export type ProjectType = 'Backend Projects' | 'Frontend Projects';
 
-interface Project {
+export interface Project {
 	title: string;
 	description: string;
 	url: string;
@@ -25,85 +26,7 @@ interface Project {
 	wantToShow: boolean;
 }
 
-// Project data with added tech stacks and types
-const projects: Project[] = [
-	{
-		title: 'Travel List',
-		description:
-			'A simple travel list app to keep track of your travel destinations. Uses local storage to store data.',
-		url: 'https://travel.ayushrajput.live/',
-		githubUrl: 'https://github.com/ayushrajput8021/travellist',
-		image: [
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/travel/1-P7V7TYwX3DR68IrsGa31LAX6EC0lsW.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/travel/2-sA5zgIQRmAnyqn3qNPo3AFmZEKNg3B.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/travel/3-o5tilNXs9iFHc28eUideemw5Koxm54.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/travel/4-sHMvHXNKqApW1Eo5SQHjtNioeVROXL.png',
-		],
-		tech: ['React', 'JavaScript', 'LocalStorage', 'TailwindCSS'],
-		isVertical: false,
-		priority: 3,
-		type: 'Frontend Projects',
-		status: 'live',
-		isFeatured: true,
-		wantToShow: true,
-	},
-	{
-		title: 'Natours',
-		description:
-			'A backend-focused project for booking tours, featuring Stripe payment gateway for secure transactions.',
-		url: 'https://natours.ayushrajput.live/',
-		githubUrl: 'https://github.com/ayushrajput8021/natoursv1',
-		image: [
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/1-2TwvpkxqTCjgUhidr41NIwVLVkeQBb.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/2-gZOGfiyo4HPWpXRuCdappl6RpJnx99.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/3-NIzfru3t6NCALpKaBebHOsgLnukenS.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/4-ClBEQ4Hqwgg27dbnLFODmLW4ybMi3m.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/5-MtGt9yNZMDQItrenUO2n2gZKp3CNSa.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/6-sd5jlWQUN138IWoGLA7RWFICdHzrD8.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/7-3My6MSLb1QZtawFSLO0lkU4Qp4YhhQ.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/8-C6b1UIVXNQ2LemUZT99uT1ZRIR9y9E.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/9-ra0lgBEjQXlYuCKcUzSxbiVrjaVEKR.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/natours/10-Cpo0pdk9LcudjfqtjX1bsNd1A1H48W.png',
-		],
-		tech: ['Node.js', 'Express', 'MongoDB', 'Stripe', 'Pug', 'CSS'],
-		isVertical: false,
-		priority: 2,
-		type: 'Backend Projects',
-		status: 'live',
-		isFeatured: true,
-		wantToShow: true,
-	},
-	{
-		title: 'Educated Joker Bot',
-		description:
-			'A Telegram bot that delivers jokes and algorithm explanations with AI-powered content generation.',
-		url: 'https://t.me/EducatedJokerBot',
-		githubUrl: 'https://github.com/ayushrajput8021/EducatedJokerBot',
-		image: [
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.03%E2%80%AFAM-st7dP2MHWisSeGI4Popmde8Ct2aBAj.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.10%E2%80%AFAM-ZAoO3gygIPCKjyihQS0LZX0WIiaQRY.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.18%E2%80%AFAM-5ml1bkEnfB8s8mRYL0HpaWQ8JqyQxZ.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.26%E2%80%AFAM-6F1DHGleuaJU0tomXkmeSDrw3AOy19.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.14.45%E2%80%AFAM-kEW0pVxvQCfKA43ULFtduzfdOQ9WwR.png',
-			'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/telegram-bot/Screenshot%202025-03-11%20at%2011.15.00%E2%80%AFAM-J10ZBfIUYWQXXp4It5L5VQKuIR49pU.png',
-		],
-		tech: [
-			'Node.js',
-			'Telegram Bot API',
-			'Gemini API',
-			'JavaScript',
-			'PM2',
-			'Telegraf.js',
-			'Gemini 2.0 Flash Lite',
-		],
-		isVertical: true,
-		priority: 1,
-		type: 'Backend Projects',
-		status: 'live',
-		isFeatured: true,
-		wantToShow: true,
-	},
-];
+
 
 export default function ProjectSection() {
 	const sectionRef = useTrackSection({ sectionId: SectionId.PROJECTS });
