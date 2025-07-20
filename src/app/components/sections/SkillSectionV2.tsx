@@ -25,7 +25,7 @@ import NodeIcon from '@/app/images/Backend/Node.js.svg';
 import ExpressIcon from '@/app/images/Backend/express-js.svg';
 import FlaskIcon from '@/app/images/Backend/Flask.svg';
 import PythonIcon from '@/app/images/Backend/python.svg';
-import FastApiIcon from '@/app/images/Backend/Fastapi.svg';
+import FastApiIcon from '@/app/images/Backend/FastAPI.svg';
 
 // Importing database images
 import MongodbIcon from '@/app/images/Database/MongoDB.svg';
