@@ -9,14 +9,14 @@ export default function Slide({ children }: props) {
 		<motion.div
 			initial={{
 				opacity: 0,
-				translateX: '-15vw', // Use viewport width units - responsive to screen size
+				translateX: '-2rem', // Changed from -15vw to -2rem for better mobile support
 			}}
 			whileInView={{
 				opacity: 1,
 				translateX: 0,
 			}}
-			transition={{ duration: 0.5 }}
-			viewport={{ once: true, amount: 0.25 }}
+			transition={{ duration: 0.6, ease: 'easeOut' }} // Slightly longer duration with easeOut
+			viewport={{ once: true, amount: 0.15 }} // Reduced amount threshold for better mobile triggering
 		>
 			{children}
 		</motion.div>

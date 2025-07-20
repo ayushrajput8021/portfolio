@@ -24,6 +24,9 @@ const FunFactSection = dynamic(
 	() => import('./components/sections/FunFactSection')
 );
 const Footer = dynamic(() => import('./components/sections/Footer'));
+const FloatingBottomNav = dynamic(
+	() => import('./components/FloatingBottomNav')
+);
 import SunIcon from '@/app/components/Icons/SunIcon';
 import MoonIcon from '@/app/components/Icons/MoonIcon';
 
@@ -76,7 +79,7 @@ export default function Home() {
 	}
 
 	return (
-		<div className='bg-background'>
+		<div className='bg-background w-full'>
 			<motion.div
 				className='fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400 origin-[0%] z-50'
 				style={{ scaleX: scrollYProgress }}
@@ -121,6 +124,7 @@ export default function Home() {
 					<ArrowUpIcon />
 				</button>
 			)}
+			<FloatingBottomNav />
 		</div>
 	);
 }
