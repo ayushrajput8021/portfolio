@@ -88,6 +88,10 @@ export default function ContactSection() {
 		message: '',
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitStatus, setSubmitStatus] = useState<{
+		type: 'success' | 'error' | null;
+		message: string;
+	}>({ type: null, message: '' });
 
 	const links = [
 		{
@@ -141,17 +145,41 @@ export default function ContactSection() {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setIsSubmitting(true);
+		setSubmitStatus({ type: null, message: '' });
 
-		// For now, just mailto functionality
-		const subject = encodeURIComponent(`Contact from ${formData.name}`);
-		const body = encodeURIComponent(
-			`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-		);
-		window.open(`mailto:${GMAIL_URL}?subject=${subject}&body=${body}`);
+		try {
+			const response = await fetch('/api/contact', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			});
 
-		// Reset form
-		setFormData({ name: '', email: '', message: '' });
-		setIsSubmitting(false);
+			const result = await response.json();
+
+			if (response.ok) {
+				setSubmitStatus({
+					type: 'success',
+					message: "Message sent successfully! I'll get back to you soon.",
+				});
+				// Reset form
+				setFormData({ name: '', email: '', message: '' });
+			} else {
+				setSubmitStatus({
+					type: 'error',
+					message: result.error || 'Failed to send message. Please try again.',
+				});
+			}
+		} catch (error) {
+			console.error('Error submitting form:', error);
+			setSubmitStatus({
+				type: 'error',
+				message: 'Network error. Please try again later.',
+			});
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -242,6 +270,18 @@ export default function ContactSection() {
 									placeholder='Your message...'
 								/>
 							</div>
+
+							{submitStatus.type && (
+								<div
+									className={`p-4 rounded-lg text-sm font-medium ${
+										submitStatus.type === 'success'
+											? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border border-green-200 dark:border-green-800'
+											: 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800'
+									}`}
+								>
+									{submitStatus.message}
+								</div>
+							)}
 
 							<button
 								type='submit'
