@@ -8,9 +8,6 @@ import { ArrowUpIcon } from 'lucide-react';
 import Slide from './components/Slider';
 import HeroSection from './components/sections/HeroSection';
 import ExperienceSection from './components/sections/ExperienceSection';
-const AboutSection = dynamic(
-	() => import('./components/sections/AboutSection')
-);
 const SkillsSection = dynamic(
 	() => import('./components/sections/SkillSectionV2')
 );
@@ -19,9 +16,6 @@ const ContactSection = dynamic(
 );
 const ProjectsSection = dynamic(
 	() => import('./components/sections/ProjectSection')
-);
-const FunFactSection = dynamic(
-	() => import('./components/sections/FunFactSection')
 );
 const Footer = dynamic(() => import('./components/sections/Footer'));
 const FloatingBottomNav = dynamic(
@@ -94,9 +88,6 @@ export default function Home() {
 				</button>
 				<HeroSection />
 				<Slide>
-					<AboutSection />
-				</Slide>
-				<Slide>
 					<ExperienceSection />
 				</Slide>
 				<Slide>
@@ -107,9 +98,6 @@ export default function Home() {
 				</Slide>
 				<Slide>
 					<ProjectsSection />
-				</Slide>
-				<Slide>
-					<FunFactSection />
 				</Slide>
 			</main>
 			<Slide>

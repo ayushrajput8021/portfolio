@@ -186,19 +186,25 @@ export default function ContactSection() {
 		<section
 			id='contact'
 			ref={sectionRef}
-			className='py-20 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
+			className='py-16 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
 		>
-			<div className='container mx-auto px-4 md:px-8 max-w-6xl'>
-				<h2
-					className='text-3xl md:text-4xl font-bold text-center font-space-mono
+			<div className='container mx-auto px-4 md:px-8 max-w-3xl'>
+				<div className='text-center mb-10'>
+					<h2
+						className='text-3xl md:text-4xl font-bold mb-3
                      text-gray-900 dark:text-gray-100 hover:text-gray-800 dark:hover:text-gray-50
-                     transition-colors duration-300 mb-12'
-				>
-					Contact Me
-				</h2>
+                     transition-colors duration-300'
+					>
+						Get In Touch
+					</h2>
+					<p className='text-gray-600 dark:text-gray-400 max-w-2xl mx-auto'>
+						Have a project in mind or want to collaborate? Drop me a message and
+						I'll get back to you soon!
+					</p>
+				</div>
 
-				<div className='grid lg:grid-cols-2 gap-12 items-start'>
-					{/* Contact Form */}
+				<div className='max-w-2xl mx-auto'>
+					{/* Centered Contact Form */}
 					<div className='bg-white dark:bg-[#101010] rounded-xl border border-gray-200/50 dark:border-gray-800/50 shadow-md hover:shadow-xl transition-all duration-500 p-8'>
 						<h3 className='text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6'>
 							Send me a message
@@ -294,51 +300,12 @@ export default function ContactSection() {
 								{isSubmitting ? 'Sending...' : 'Send Message'}
 							</button>
 						</form>
-					</div>
 
-					{/* Links Section */}
-					<div className='space-y-8'>
-						<div>
-							<h3 className='text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6'>
-								Connect with me
-							</h3>
-							<p className='text-gray-600 dark:text-gray-400 mb-8 leading-relaxed'>
-								Feel free to reach out through any of these platforms. I&apos;m
-								always open to discussing new opportunities, collaborations, or
-								just having a chat about technology and development.
-							</p>
-						</div>
-
-						<div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-							{links.map((link, index) => {
-								const buttonStyles = getLinkButtonStyles(link.title);
-								return (
-									<a
-										key={index}
-										href={
-											link.title === 'Gmail' ? `mailto:${link.href}` : link.href
-										}
-										className={`group flex items-center gap-3 p-4 rounded-xl border
-										           shadow-sm hover:shadow-lg hover:-translate-y-1
-										           transition-all duration-300 transform
-										           ${buttonStyles.container}`}
-										target='_blank'
-										rel='noopener noreferrer'
-									>
-										<span
-											className={`flex-shrink-0 transition-all duration-300 ${buttonStyles.icon}`}
-										>
-											{link.icon}
-										</span>
-										<span
-											className={`text-lg font-medium transition-all duration-300 ${buttonStyles.text}`}
-										>
-											{link.label}
-										</span>
-									</a>
-								);
-							})}
-						</div>
+						{/* Social Links Note */}
+						<p className='text-center mt-6 text-sm text-gray-500 dark:text-gray-400'>
+							Or connect with me on social media{' '}
+							<span className='font-medium'>(links in footer below)</span>
+						</p>
 					</div>
 				</div>
 			</div>

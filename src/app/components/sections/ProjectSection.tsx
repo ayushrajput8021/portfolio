@@ -197,6 +197,7 @@ export default function ProjectSection() {
 	const [selectedType, setSelectedType] = useState<ProjectType | 'All'>('All');
 	const [modalProject, setModalProject] = useState<Project | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [showAll, setShowAll] = useState(false);
 
 	// Get unique project types that have actual projects
 	const projectTypes: ProjectType[] = Array.from(
@@ -208,6 +209,12 @@ export default function ProjectSection() {
 		selectedType === 'All'
 			? projects
 			: projects.filter((project) => project.type === selectedType);
+
+	// Show only featured projects initially (max 4)
+	const featuredProjects = projects.filter((p) => p.isFeatured);
+	const displayProjects = showAll
+		? filteredProjects
+		: featuredProjects.slice(0, 4);
 
 	// Click handler function
 	const handleLinkClick = (
@@ -233,20 +240,28 @@ export default function ProjectSection() {
 		<section
 			id='projects'
 			ref={sectionRef}
-			className='py-20 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
+			className='py-16 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
 		>
 			<div className='container px-4 sm:px-6 lg:px-8 mx-auto max-w-6xl'>
-				<h2
-					className='mb-12 text-3xl md:text-4xl font-bold text-center font-space-mono
+				<div className='text-center mb-10'>
+					<h2
+						className='text-3xl md:text-4xl font-bold mb-3
                               text-gray-900 dark:text-gray-100
                               hover:text-gray-800 dark:hover:text-gray-50
                               transition-colors duration-300'
-				>
-					My Projects
-				</h2>
+					>
+						{showAll ? 'All Projects' : 'Featured Projects'}
+					</h2>
+					<p className='text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm'>
+						{showAll
+							? `Showcasing all ${projects.length} projects`
+							: `Showcasing ${displayProjects.length} featured projects`}
+					</p>
+				</div>
 
-				{/* Project Type Filter */}
-				<div className='mb-8 flex flex-wrap justify-center gap-3'>
+				{/* Project Type Filter - Only show when viewing all */}
+				{showAll && (
+					<div className='mb-8 flex flex-wrap justify-center gap-3'>
 					<button
 						onClick={() => setSelectedType('All')}
 						className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -275,10 +290,11 @@ export default function ProjectSection() {
 							</button>
 						);
 					})}
-				</div>
+					</div>
+				)}
 
 				<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-					{filteredProjects
+					{displayProjects
 						.sort((a, b) => a.priority - b.priority)
 						.map((project, index) => (
 							<div
@@ -559,6 +575,55 @@ export default function ProjectSection() {
 							</div>
 						))}
 				</div>
+
+				{/* Show All/Less Button */}
+				{!showAll && projects.length > 4 && (
+					<div className='text-center mt-10'>
+						<button
+							onClick={() => setShowAll(true)}
+							className='px-8 py-3 bg-blue-600 hover:bg-blue-700
+                         dark:bg-blue-500 dark:hover:bg-blue-600
+                         text-white font-semibold rounded-lg
+                         transition-all duration-300 transform hover:scale-105
+                         flex items-center gap-2 mx-auto group'
+						>
+							<span>View All {projects.length} Projects</span>
+							<svg
+								className='w-5 h-5 transform group-hover:translate-x-1 
+                             transition-transform duration-300'
+								fill='none'
+								stroke='currentColor'
+								viewBox='0 0 24 24'
+							>
+								<path
+									strokeLinecap='round'
+									strokeLinejoin='round'
+									strokeWidth={2}
+									d='M13 7l5 5m0 0l-5 5m5-5H6'
+								/>
+							</svg>
+						</button>
+					</div>
+				)}
+
+				{showAll && (
+					<div className='text-center mt-10'>
+						<button
+							onClick={() => {
+								setShowAll(false);
+								setSelectedType('All');
+							}}
+							className='px-8 py-3 bg-white dark:bg-[#101010]
+                         border border-gray-200 dark:border-gray-800
+                         text-gray-700 dark:text-gray-300
+                         font-semibold rounded-lg
+                         hover:bg-gray-50 dark:hover:bg-gray-800
+                         transition-all duration-300'
+						>
+							Show Less
+						</button>
+					</div>
+				)}
 			</div>
 
 			{/* Image Modal */}

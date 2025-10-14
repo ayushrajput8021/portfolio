@@ -12,11 +12,11 @@ export default function FunFactSection() {
 		<section
 			ref={sectionRef}
 			id='funfact'
-			className='py-20 bg-gray-100 dark:bg-[#050505] transition-colors duration-300'
+			className='py-16 bg-gray-100 dark:bg-[#050505] transition-colors duration-300'
 		>
 			<div className='flex flex-col items-center justify-center p-6 max-w-5xl mx-auto'>
 				<h2
-					className='mb-12 text-3xl md:text-4xl font-bold text-center font-garamond
+					className='mb-10 text-3xl md:text-4xl font-bold text-center font-garamond
                               text-gray-900 dark:text-gray-100
                               hover:text-gray-800 dark:hover:text-gray-50
                               transition-colors duration-300'
