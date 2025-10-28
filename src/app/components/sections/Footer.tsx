@@ -102,27 +102,26 @@ export default function Footer() {
 
 	return (
 		<footer
-			className='bg-gray-200 dark:bg-[#1A1A1A] py-10
-                       border-t border-gray-300/50 dark:border-gray-800/50
-                       transition-colors duration-300'
+			className='relative pt-8 pb-8 border-t border-gray-200 dark:border-gray-800'
 		>
-			<div className='max-w-5xl mx-auto px-4'>
+			<div className='max-w-4xl mx-auto px-4'>
 				{/* Social Links */}
-				<div className='flex flex-wrap justify-center gap-3 mb-6'>
+				<div className='flex flex-wrap justify-center gap-2 mb-6'>
 					{socialLinks.map((link, index) => (
 						<a
 							key={index}
 							href={link.href}
 							target='_blank'
 							rel='noopener noreferrer'
-							className='flex items-center gap-2 px-4 py-2 rounded-lg
-                         bg-white dark:bg-gray-800
-                         border border-gray-200 dark:border-gray-700
+							className='flex items-center gap-2 px-3 py-2 rounded-lg
+                         bg-white dark:bg-gray-900
+                         border border-gray-300 dark:border-gray-700
                          text-gray-700 dark:text-gray-300
-                         hover:bg-gray-50 dark:hover:bg-gray-700
-                         hover:border-gray-300 dark:hover:border-gray-600
+                         hover:bg-gray-900 dark:hover:bg-gray-100
+                         hover:text-white dark:hover:text-black
+                         hover:border-gray-900 dark:hover:border-gray-100
                          hover:scale-105
-                         transition-all duration-300 text-sm font-medium group'
+                         transition-all duration-300 text-xs font-medium group'
 							aria-label={link.label}
 						>
 							<span className='group-hover:scale-110 transition-transform duration-300'>
@@ -133,55 +132,13 @@ export default function Footer() {
 					))}
 				</div>
 
-				{/* Fun Fact Badge */}
-				<div className='text-center mb-6'>
-					<details className='inline-block group'>
-						<summary
-							className='cursor-pointer text-xs text-gray-500 
-                                dark:text-gray-400 hover:text-gray-700 
-                                dark:hover:text-gray-300 transition-colors
-                                flex items-center gap-2 justify-center
-                                px-4 py-2 rounded-lg
-                                hover:bg-gray-100 dark:hover:bg-gray-800/50'
-						>
-							<span className='text-base'>💡</span>
-							<span className='font-medium'>Tech Insight</span>
-						</summary>
-						<p
-							className='mt-3 text-xs text-gray-600 dark:text-gray-400 
-                          max-w-2xl mx-auto leading-relaxed
-                          bg-white dark:bg-gray-800/50 
-                          border border-gray-200 dark:border-gray-700
-                          rounded-lg p-4'
-						>
-							All projects on this website are self-hosted on an AWS EC2 Virtual
-							Machine. The website itself is deployed on Vercel, while the
-							database runs on the same VM using Docker containers. Nginx serves
-							as a reverse proxy server, and security is ensured with an SSL
-							certificate from CertBot. The domain is registered with a .name
-							TLD, and Vercel domains are mapped using a CNAME record.
-						</p>
-					</details>
-				</div>
-
 				{/* Copyright */}
 				<p
-					className='text-center text-gray-600 dark:text-gray-400 text-sm
-                               hover:text-gray-700 dark:hover:text-gray-300
+					className='text-center text-gray-600 dark:text-gray-400 text-xs
+                               hover:text-gray-900 dark:hover:text-gray-100
                                transition-colors duration-300'
 				>
-					© {currentYear} | Made with
-					<span
-						className={`mx-1 ${
-							theme === 'light'
-								? 'text-red-500 hover:text-red-600'
-								: 'text-red-400 hover:text-red-300'
-						}
-                            transition-colors duration-300`}
-					>
-						❤️
-					</span>
-					by Ayush Rajput
+					© {currentYear} Ayush Rajput • All rights reserved
 				</p>
 			</div>
 		</footer>

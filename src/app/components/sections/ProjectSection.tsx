@@ -7,6 +7,7 @@ import { SectionId } from '@/app/services/appwrite';
 import { analyticsService } from '@/app/services/analytics';
 import { useState, useEffect } from 'react';
 import { projects } from '@/app/data/projects';
+import { Info } from 'lucide-react';
 
 // Project types
 export type ProjectType =
@@ -240,18 +241,48 @@ export default function ProjectSection() {
 		<section
 			id='projects'
 			ref={sectionRef}
-			className='py-16 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
+			className='py-16'
 		>
 			<div className='container px-4 sm:px-6 lg:px-8 mx-auto max-w-6xl'>
 				<div className='text-center mb-10'>
-					<h2
-						className='text-3xl md:text-4xl font-bold mb-3
+					<div className='flex items-center justify-center gap-2 mb-3'>
+						<h2
+							className='text-3xl md:text-4xl font-bold
                               text-gray-900 dark:text-gray-100
                               hover:text-gray-800 dark:hover:text-gray-50
                               transition-colors duration-300'
-					>
-						{showAll ? 'All Projects' : 'Featured Projects'}
-					</h2>
+						>
+							{showAll ? 'All Projects' : 'Featured Projects'}
+						</h2>
+						
+						{/* Tech Stack Info Button */}
+						<div className='relative group'>
+							<button
+								className='p-1.5 rounded-full bg-gray-200 dark:bg-gray-800 
+								         text-gray-600 dark:text-gray-400
+								         hover:bg-gray-900 dark:hover:bg-gray-100
+								         hover:text-white dark:hover:text-black
+								         transition-all duration-300'
+								aria-label='Tech stack information'
+							>
+								<Info className='w-4 h-4' />
+							</button>
+							
+							{/* Hover Tooltip */}
+							<div className='absolute left-1/2 -translate-x-1/2 top-full mt-2 
+							              opacity-0 invisible group-hover:opacity-100 group-hover:visible
+							              transition-all duration-300 z-50 pointer-events-none'>
+								<div className='bg-white dark:bg-gray-900 
+								              border border-gray-300 dark:border-gray-700
+								              rounded-lg shadow-lg p-3 w-64 text-left'>
+									<p className='text-xs text-gray-600 dark:text-gray-400 leading-relaxed'>
+										Self-hosted on AWS EC2 • Deployed on Vercel • Docker containers • 
+										Nginx reverse proxy • SSL via CertBot • .name TLD with CNAME mapping
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
 					<p className='text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-sm'>
 						{showAll
 							? `Showcasing all ${projects.length} projects`

@@ -65,8 +65,8 @@ const skillsConfig: Array<{
 			{ icon: TypescriptIcon, name: 'TypeScript', color: 'bg-blue-600' },
 			{ icon: JavascriptIcon, name: 'JavaScript', color: 'bg-yellow-500' },
 		],
-		accentColor: 'border-blue-300 dark:border-blue-700',
-		hoverColor: 'hover:border-blue-400 dark:hover:border-blue-600',
+		accentColor: 'border-gray-300 dark:border-gray-700',
+		hoverColor: 'hover:border-gray-400 dark:hover:border-gray-600',
 	},
 	{
 		title: 'Backend',
@@ -77,8 +77,8 @@ const skillsConfig: Array<{
 			{ icon: PythonIcon, name: 'Python', color: 'bg-blue-500' },
 			{ icon: FastApiIcon, name: 'FastAPI', color: 'bg-teal-500' },
 		],
-		accentColor: 'border-green-300 dark:border-green-700',
-		hoverColor: 'hover:border-green-400 dark:hover:border-green-600',
+		accentColor: 'border-gray-300 dark:border-gray-700',
+		hoverColor: 'hover:border-gray-400 dark:hover:border-gray-600',
 	},
 	{
 		title: 'Database',
@@ -88,8 +88,8 @@ const skillsConfig: Array<{
 			{ icon: MysqlIcon, name: 'MySQL', color: 'bg-orange-600' },
 			{ icon: RedisIcon, name: 'Redis', color: 'bg-red-600' },
 		],
-		accentColor: 'border-purple-300 dark:border-purple-700',
-		hoverColor: 'hover:border-purple-400 dark:hover:border-purple-600',
+		accentColor: 'border-gray-300 dark:border-gray-700',
+		hoverColor: 'hover:border-gray-400 dark:hover:border-gray-600',
 	},
 	{
 		title: 'Cloud & DevOps',
@@ -100,8 +100,8 @@ const skillsConfig: Array<{
 			{ icon: NginxIcon, name: 'NGINX', color: 'bg-green-600' },
 			{ icon: VercelIcon, name: 'Vercel', color: 'bg-black' },
 		],
-		accentColor: 'border-orange-300 dark:border-orange-700',
-		hoverColor: 'hover:border-orange-400 dark:hover:border-orange-600',
+		accentColor: 'border-gray-300 dark:border-gray-700',
+		hoverColor: 'hover:border-gray-400 dark:hover:border-gray-600',
 	},
 ];
 
@@ -152,8 +152,8 @@ function SkillCategory({ title, items }: SkillCategoryProps) {
                                       shadow-sm border border-gray-200 dark:border-gray-700
                                       transition-all duration-300
                                       group-hover/skill:scale-110
-                                      group-hover/skill:shadow-lg group-hover/skill:shadow-blue-500/25
-                                      group-hover/skill:border-blue-300 dark:group-hover/skill:border-blue-500
+                                      group-hover/skill:shadow-lg group-hover/skill:shadow-gray-500/25
+                                      group-hover/skill:border-gray-400 dark:group-hover/skill:border-gray-600
                                       ${
 																				theme === 'dark'
 																					? 'bg-gray-800 group-hover/skill:bg-gray-700'
@@ -196,7 +196,7 @@ function SkillCategory({ title, items }: SkillCategoryProps) {
 						</div>
 						<span
 							className='text-xs font-medium text-gray-600 dark:text-gray-400
-                                      group-hover/skill:text-blue-600 dark:group-hover/skill:text-blue-400
+                                      group-hover/skill:text-gray-900 dark:group-hover/skill:text-gray-100
                                       text-center transition-all duration-300
                                       group-hover/skill:font-semibold group-hover/skill:transform
                                       group-hover/skill:scale-105'
@@ -223,11 +223,20 @@ export default function SkillsSection() {
 		setCurrentSlide((prev) => (prev - 1 + skillsConfig.length) % skillsConfig.length);
 	};
 
+	const handleDragEnd = (event: any, info: any) => {
+		const swipeThreshold = 50;
+		if (info.offset.x > swipeThreshold) {
+			prevSlide();
+		} else if (info.offset.x < -swipeThreshold) {
+			nextSlide();
+		}
+	};
+
 	return (
 		<section
 			id='skills'
 			ref={sectionRef}
-			className='py-16 bg-gray-50 dark:bg-[#050505] transition-colors duration-300'
+			className='py-16'
 		>
 			<div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl'>
 				<div className='text-center mb-10'>
@@ -254,15 +263,15 @@ export default function SkillsSection() {
 								animate={{ opacity: 1, x: 0 }}
 								exit={{ opacity: 0, x: -100 }}
 								transition={{ duration: 0.3 }}
-								className='w-full'
+								drag='x'
+								dragConstraints={{ left: 0, right: 0 }}
+								dragElastic={0.2}
+								onDragEnd={handleDragEnd}
+								className='w-full cursor-grab active:cursor-grabbing'
 							>
 								{(() => {
 									const category = skillsConfig[currentSlide];
-									const categoryHoverColor = 
-										category.title === 'Frontend' ? 'group-hover:border-blue-400 dark:group-hover:border-blue-500 group-hover:shadow-blue-200 dark:group-hover:shadow-blue-900/50' :
-										category.title === 'Backend' ? 'group-hover:border-green-400 dark:group-hover:border-green-500 group-hover:shadow-green-200 dark:group-hover:shadow-green-900/50' :
-										category.title === 'Database' ? 'group-hover:border-purple-400 dark:group-hover:border-purple-500 group-hover:shadow-purple-200 dark:group-hover:shadow-purple-900/50' :
-										'group-hover:border-orange-400 dark:group-hover:border-orange-500 group-hover:shadow-orange-200 dark:group-hover:shadow-orange-900/50';
+									const categoryHoverColor = 'group-hover:border-gray-400 dark:group-hover:border-gray-600 group-hover:shadow-gray-200 dark:group-hover:shadow-gray-900/50';
 
 									return (
 										<div
@@ -345,7 +354,7 @@ export default function SkillsSection() {
 					<div className='flex items-center justify-center gap-4 mt-6'>
 						<button
 							onClick={prevSlide}
-							className='p-2 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-300 shadow-md hover:shadow-lg'
+							className='p-2 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-gray-900 dark:hover:border-gray-300 transition-all duration-300 shadow-md hover:shadow-lg'
 							aria-label='Previous slide'
 						>
 							<ChevronLeft className='w-5 h-5 text-gray-700 dark:text-gray-300' />
@@ -359,7 +368,7 @@ export default function SkillsSection() {
 									onClick={() => setCurrentSlide(index)}
 									className={`h-2 rounded-full transition-all duration-300 ${
 										index === currentSlide
-											? 'w-8 bg-purple-600 dark:bg-purple-500'
+											? 'w-8 bg-gray-900 dark:bg-gray-100'
 											: 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
 									}`}
 									aria-label={`Go to slide ${index + 1}`}
@@ -369,7 +378,7 @@ export default function SkillsSection() {
 
 						<button
 							onClick={nextSlide}
-							className='p-2 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-300 shadow-md hover:shadow-lg'
+							className='p-2 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-gray-900 dark:hover:border-gray-300 transition-all duration-300 shadow-md hover:shadow-lg'
 							aria-label='Next slide'
 						>
 							<ChevronRight className='w-5 h-5 text-gray-700 dark:text-gray-300' />
@@ -380,11 +389,7 @@ export default function SkillsSection() {
 				{/* Desktop Grid Layout */}
 				<div className='hidden md:grid grid-cols-1 md:grid-cols-2 gap-6'>
 					{skillsConfig.map((category, index) => {
-						const categoryHoverColor = 
-							category.title === 'Frontend' ? 'group-hover:border-blue-400 dark:group-hover:border-blue-500 group-hover:shadow-blue-200 dark:group-hover:shadow-blue-900/50' :
-							category.title === 'Backend' ? 'group-hover:border-green-400 dark:group-hover:border-green-500 group-hover:shadow-green-200 dark:group-hover:shadow-green-900/50' :
-							category.title === 'Database' ? 'group-hover:border-purple-400 dark:group-hover:border-purple-500 group-hover:shadow-purple-200 dark:group-hover:shadow-purple-900/50' :
-							'group-hover:border-orange-400 dark:group-hover:border-orange-500 group-hover:shadow-orange-200 dark:group-hover:shadow-orange-900/50';
+						const categoryHoverColor = 'group-hover:border-gray-400 dark:group-hover:border-gray-600 group-hover:shadow-gray-200 dark:group-hover:shadow-gray-900/50';
 
 						return (
 							<div
@@ -470,13 +475,13 @@ export default function SkillsSection() {
 const CategoryIcons = {
 	Frontend: (
 		<div
-			className='p-2 bg-blue-100/70 dark:bg-blue-900/30 rounded-lg
-                      group-hover:bg-blue-200 dark:group-hover:bg-blue-800/50
+			className='p-2 bg-gray-100 dark:bg-gray-800 rounded-lg
+                      group-hover:bg-gray-200 dark:group-hover:bg-gray-700
                       transition-all duration-300'
 		>
 			<svg
-				className='w-6 h-6 text-blue-600 dark:text-blue-400
-                          group-hover:text-blue-700 dark:group-hover:text-blue-300
+				className='w-6 h-6 text-gray-700 dark:text-gray-300
+                          group-hover:text-gray-900 dark:group-hover:text-gray-100
                           transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
@@ -493,13 +498,13 @@ const CategoryIcons = {
 	),
 	Backend: (
 		<div
-			className='p-2 bg-green-100/70 dark:bg-green-900/30 rounded-lg
-                      group-hover:bg-green-200 dark:group-hover:bg-green-800/50
+			className='p-2 bg-gray-100 dark:bg-gray-800 rounded-lg
+                      group-hover:bg-gray-200 dark:group-hover:bg-gray-700
                       transition-all duration-300'
 		>
 			<svg
-				className='w-6 h-6 text-green-600 dark:text-green-400
-                          group-hover:text-green-700 dark:group-hover:text-green-300
+				className='w-6 h-6 text-gray-700 dark:text-gray-300
+                          group-hover:text-gray-900 dark:group-hover:text-gray-100
                           transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
@@ -516,13 +521,13 @@ const CategoryIcons = {
 	),
 	Database: (
 		<div
-			className='p-2 bg-purple-100/70 dark:bg-purple-900/30 rounded-lg
-                      group-hover:bg-purple-200 dark:group-hover:bg-purple-800/50
+			className='p-2 bg-gray-100 dark:bg-gray-800 rounded-lg
+                      group-hover:bg-gray-200 dark:group-hover:bg-gray-700
                       transition-all duration-300'
 		>
 			<svg
-				className='w-6 h-6 text-purple-600 dark:text-purple-400
-                          group-hover:text-purple-700 dark:group-hover:text-purple-300
+				className='w-6 h-6 text-gray-700 dark:text-gray-300
+                          group-hover:text-gray-900 dark:group-hover:text-gray-100
                           transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'
@@ -539,13 +544,13 @@ const CategoryIcons = {
 	),
 	'Cloud & DevOps': (
 		<div
-			className='p-2 bg-orange-100/70 dark:bg-orange-900/30 rounded-lg
-                      group-hover:bg-orange-200 dark:group-hover:bg-orange-800/50
+			className='p-2 bg-gray-100 dark:bg-gray-800 rounded-lg
+                      group-hover:bg-gray-200 dark:group-hover:bg-gray-700
                       transition-all duration-300'
 		>
 			<svg
-				className='w-6 h-6 text-orange-600 dark:text-orange-400
-                          group-hover:text-orange-700 dark:group-hover:text-orange-300
+				className='w-6 h-6 text-gray-700 dark:text-gray-300
+                          group-hover:text-gray-900 dark:group-hover:text-gray-100
                           transition-colors duration-300'
 				fill='none'
 				stroke='currentColor'

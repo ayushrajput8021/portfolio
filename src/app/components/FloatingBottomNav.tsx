@@ -1,15 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-	Home,
-	User,
-	Briefcase,
-	Code,
-	FolderOpen,
-	Mail,
-	Star,
-} from 'lucide-react';
+import { Home, Briefcase, Code, FolderOpen, Mail, Star } from 'lucide-react';
 import { SectionId } from '@/app/services/appwrite';
 
 interface NavItem {
@@ -26,12 +18,6 @@ const navItems: NavItem[] = [
 		icon: Home,
 		label: 'Home',
 		sectionSelector: 'section:first-child', // HeroSection is the first section
-	},
-	{
-		id: SectionId.ABOUT,
-		icon: User,
-		label: 'About',
-		sectionSelector: '#about',
 	},
 	{
 		id: SectionId.EXPERIENCE,
@@ -68,9 +54,36 @@ const navItems: NavItem[] = [
 export default function FloatingBottomNav() {
 	const [activeSection, setActiveSection] = useState<SectionId>(SectionId.HERO);
 	const [hoveredItem, setHoveredItem] = useState<SectionId | null>(null);
+	const [isFooterVisible, setIsFooterVisible] = useState(false);
 	const observerRef = useRef<IntersectionObserver | null>(null);
 
 	useEffect(() => {
+		// Observer for footer visibility
+		const footerObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					setIsFooterVisible(entry.isIntersecting);
+				});
+			},
+			{
+				root: null,
+				threshold: 0.1,
+			}
+		);
+
+		// Observe footer
+		const footer = document.querySelector('footer');
+		if (footer) {
+			footerObserver.observe(footer);
+		}
+
+		// Cleanup footer observer
+		const cleanupFooterObserver = () => {
+			if (footer) {
+				footerObserver.unobserve(footer);
+			}
+		};
+
 		// Create intersection observer to track visible sections
 		const observerOptions = {
 			root: null,
@@ -92,9 +105,7 @@ export default function FloatingBottomNav() {
 					let sectionId: SectionId | null = null;
 
 					// Try to match by ID first
-					if (element.id === 'about') {
-						sectionId = SectionId.ABOUT;
-					} else if (element.id === 'experience') {
+					if (element.id === 'experience') {
 						sectionId = SectionId.EXPERIENCE;
 					} else if (element.id === 'skills') {
 						sectionId = SectionId.SKILLS;
@@ -156,6 +167,7 @@ export default function FloatingBottomNav() {
 				observerRef.current.disconnect();
 			}
 			window.removeEventListener('scroll', handleScroll);
+			cleanupFooterObserver();
 		};
 	}, []);
 
@@ -166,9 +178,6 @@ export default function FloatingBottomNav() {
 			case SectionId.HERO:
 				window.scrollTo({ top: 0, behavior: 'smooth' });
 				return;
-			case SectionId.ABOUT:
-				targetElement = document.querySelector('#about');
-				break;
 			case SectionId.EXPERIENCE:
 				targetElement = document.querySelector('#experience');
 				break;
@@ -196,38 +205,41 @@ export default function FloatingBottomNav() {
 
 	return (
 		<AnimatePresence>
-			{activeSection !== SectionId.HERO && (
+			{activeSection !== SectionId.HERO && !isFooterVisible && (
 				<motion.div
 					initial={{ y: 100, opacity: 0 }}
 					animate={{ y: 0, opacity: 1 }}
 					exit={{ y: 100, opacity: 0 }}
 					transition={{ duration: 0.3 }}
-					className='fixed bottom-4 sm:bottom-8 left-1/2 z-50'
+					className='fixed bottom-6 left-1/2 z-40'
 					style={{ x: '-50%' }}
 				>
-					<div className='flex items-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-2 sm:py-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg rounded-full border border-gray-200/30 dark:border-gray-700/30 shadow-lg'>
+					<div className='flex items-center gap-1 px-2 py-1.5 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl rounded-full border border-gray-300 dark:border-gray-700 shadow-lg'>
 						{navItems.map((item) => {
 							const Icon = item.icon;
 							const isActive = activeSection === item.id;
 							const isHovered = hoveredItem === item.id;
 
 							return (
-								<div key={item.id} className='relative'>
+								<motion.div
+									key={item.id}
+									className='relative flex items-center justify-center'
+									onMouseEnter={() => setHoveredItem(item.id)}
+									onMouseLeave={() => setHoveredItem(null)}
+								>
 									<motion.button
 										onClick={() => scrollToSection(item.id)}
-										onMouseEnter={() => setHoveredItem(item.id)}
-										onMouseLeave={() => setHoveredItem(null)}
-										className={`relative p-2 sm:p-3 rounded-full transition-all duration-300 ${
+										className={`relative p-2 rounded-full transition-all duration-300 ${
 											isActive
-												? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 shadow-md'
-												: 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100/50 dark:hover:bg-gray-800/50'
+												? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-black shadow-md'
+												: 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800'
 										}`}
-										whileHover={{ scale: 1.05 }}
-										whileTap={{ scale: 0.95 }}
+										whileHover={{ scale: 1.1 }}
+										whileTap={{ scale: 0.9 }}
 									>
 										<Icon
 											size={16}
-											className='w-4 h-4 sm:w-[18px] sm:h-[18px] transition-transform duration-300'
+											className='w-4 h-4 transition-transform duration-300'
 										/>
 									</motion.button>
 
@@ -239,15 +251,15 @@ export default function FloatingBottomNav() {
 												animate={{ opacity: 1, y: 0, scale: 1 }}
 												exit={{ opacity: 0, y: 5, scale: 0.9 }}
 												transition={{ duration: 0.15 }}
-												className='absolute bottom-full  mb-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs font-medium rounded-lg shadow-lg whitespace-nowrap'
+												className='absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 bg-gray-900 dark:bg-gray-100 text-white dark:text-black text-xs font-medium rounded-lg shadow-lg whitespace-nowrap pointer-events-none'
 											>
 												{item.label}
 												{/* Tooltip arrow */}
-												<div className='absolute top-full  w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-gray-900 dark:border-t-gray-100' />
+												<div className='absolute top-full left-1/2 -translate-x-1/2 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[5px] border-t-gray-900 dark:border-t-gray-100' />
 											</motion.div>
 										)}
 									</AnimatePresence>
-								</div>
+								</motion.div>
 							);
 						})}
 					</div>

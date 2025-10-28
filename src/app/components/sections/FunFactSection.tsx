@@ -12,7 +12,7 @@ export default function FunFactSection() {
 		<section
 			ref={sectionRef}
 			id='funfact'
-			className='py-16 bg-gray-100 dark:bg-[#050505] transition-colors duration-300'
+			className='py-16'
 		>
 			<div className='flex flex-col items-center justify-center p-6 max-w-5xl mx-auto'>
 				<h2

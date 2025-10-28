@@ -73,36 +73,44 @@ export default function Home() {
 	}
 
 	return (
-		<div className='bg-background w-full'>
+		<div className='w-full'>
 			<motion.div
 				className='fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400 origin-[0%] z-50'
 				style={{ scaleX: scrollYProgress }}
 			/>
-			<main className='flex flex-col flex-grow relative'>
-				<button
-					onClick={handleThemeToggle}
-					className={`${buttonStyles} top-4 right-4`}
-					aria-label='Toggle theme'
-				>
-					{theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-				</button>
-				<HeroSection />
+			{/* Unified gradient background container */}
+			<div className='relative min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 dark:from-black dark:via-gray-950 dark:to-gray-900'>
+				{/* Animated Background Elements - Monochrome */}
+				<div className='fixed top-20 left-10 w-96 h-96 bg-gray-200 dark:bg-gray-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-20 animate-blob' />
+				<div className='fixed top-40 right-10 w-96 h-96 bg-gray-300 dark:bg-gray-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-20 animate-blob animation-delay-2000' />
+				<div className='fixed bottom-20 left-1/3 w-96 h-96 bg-gray-400 dark:bg-gray-600 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-20 animate-blob animation-delay-4000' />
+				
+				<main className='relative z-10 flex flex-col flex-grow'>
+					<button
+						onClick={handleThemeToggle}
+						className={`${buttonStyles} top-4 right-4`}
+						aria-label='Toggle theme'
+					>
+						{theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+					</button>
+					<HeroSection />
+					<Slide>
+						<ExperienceSection />
+					</Slide>
+					<Slide>
+						<SkillsSection />
+					</Slide>
+					<Slide>
+						<ContactSection />
+					</Slide>
+					<Slide>
+						<ProjectsSection />
+					</Slide>
+				</main>
 				<Slide>
-					<ExperienceSection />
+					<Footer />
 				</Slide>
-				<Slide>
-					<SkillsSection />
-				</Slide>
-				<Slide>
-					<ContactSection />
-				</Slide>
-				<Slide>
-					<ProjectsSection />
-				</Slide>
-			</main>
-			<Slide>
-				<Footer />
-			</Slide>
+			</div>
 			{isScrollButtonVisible && (
 				<button
 					onClick={handleScrollToTop}
