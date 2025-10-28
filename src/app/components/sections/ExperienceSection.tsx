@@ -11,7 +11,6 @@ import {
 	Sparkles,
 	Code2,
 	Rocket,
-	Building2,
 	Laptop,
 	DollarSign,
 	ShoppingCart,
@@ -102,11 +101,7 @@ export default function ExperienceSection() {
 	const visibleExperiences = showAll ? experiences : experiences.slice(0, 2);
 
 	return (
-		<section
-			id='experience'
-			ref={sectionRef}
-			className='py-20'
-		>
+		<section id='experience' ref={sectionRef} className='py-20'>
 			<div className='container px-4 sm:px-6 lg:px-8 mx-auto max-w-6xl'>
 				{/* Section Header */}
 				<motion.div

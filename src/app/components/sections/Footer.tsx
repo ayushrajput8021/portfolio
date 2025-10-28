@@ -1,5 +1,5 @@
 'use client';
-import { useTheme } from 'next-themes';
+
 import {
 	GITHUB_URL,
 	LINKEDIN_URL,
@@ -10,7 +10,6 @@ import {
 } from '@/app/utils/constants';
 
 export default function Footer() {
-	const { theme } = useTheme();
 	const currentYear = new Date().getFullYear();
 
 	const socialLinks = [
@@ -101,9 +100,7 @@ export default function Footer() {
 	];
 
 	return (
-		<footer
-			className='relative pt-8 pb-8 border-t border-gray-200 dark:border-gray-800'
-		>
+		<footer className='relative pt-8 pb-8 border-t border-gray-200 dark:border-gray-800'>
 			<div className='max-w-4xl mx-auto px-4'>
 				{/* Social Links */}
 				<div className='flex flex-wrap justify-center gap-2 mb-6'>

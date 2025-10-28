@@ -105,111 +105,6 @@ const skillsConfig: Array<{
 	},
 ];
 
-interface SkillCategoryProps {
-	title: string;
-	items: {
-		icon: string | null;
-		name: string;
-		color: string;
-		isText?: boolean;
-	}[];
-}
-
-function SkillCategory({ title, items }: SkillCategoryProps) {
-	const { theme } = useTheme();
-
-	return (
-		<div
-			className='group relative p-6 bg-white dark:bg-[#101010] rounded-xl
-                      border border-gray-200/50 dark:border-gray-800/50 shadow-md
-                      hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-700
-                      transition-all duration-300'
-		>
-			{/* Category Header */}
-			<div className='flex items-center gap-3 mb-6'>
-				{CategoryIcons[title as keyof typeof CategoryIcons]}
-				<h3
-					className='text-lg font-semibold text-gray-800 dark:text-gray-100
-                              group-hover:text-gray-900 dark:group-hover:text-white
-                              transition-colors duration-300'
-				>
-					{title}
-				</h3>
-			</div>
-
-			{/* Skills Grid */}
-			<div className='grid grid-cols-2 sm:grid-cols-3 gap-4'>
-				{items.map((item, index) => (
-					<div
-						key={index}
-						className='flex flex-col items-center gap-3 group/skill p-3 rounded-lg
-                               hover:bg-gray-50 dark:hover:bg-gray-800/50
-                               transition-all duration-300 cursor-pointer
-                               hover:transform hover:-translate-y-1'
-					>
-						<div
-							className={`w-12 h-12 rounded-lg flex items-center justify-center
-                                      shadow-sm border border-gray-200 dark:border-gray-700
-                                      transition-all duration-300
-                                      group-hover/skill:scale-110
-                                      group-hover/skill:shadow-lg group-hover/skill:shadow-gray-500/25
-                                      group-hover/skill:border-gray-400 dark:group-hover/skill:border-gray-600
-                                      ${
-																				theme === 'dark'
-																					? 'bg-gray-800 group-hover/skill:bg-gray-700'
-																					: 'bg-white group-hover/skill:bg-gray-50'
-																			}`}
-						>
-							{item.isText ? (
-								<span
-									className={`text-white text-xs font-bold px-2 py-1 rounded ${item.color}
-                                              transition-all duration-300
-                                              group-hover/skill:scale-110 group-hover/skill:shadow-md`}
-								>
-									{item.name.slice(0, 2)}
-								</span>
-							) : item.icon ? (
-								<Image
-									src={item.icon}
-									alt={item.name}
-									width={28}
-									height={28}
-									className={`w-7 h-7 object-contain
-                                              transition-all duration-300
-                                              group-hover/skill:scale-110 group-hover/skill:drop-shadow-lg
-                                              ${
-																								theme === 'dark' &&
-																								isDarkIcon(item.icon)
-																									? 'filter invert brightness-0 contrast-100'
-																									: ''
-																							}`}
-								/>
-							) : (
-								<span
-									className={`text-white text-xs font-bold px-2 py-1 rounded ${item.color}
-                                              transition-all duration-300
-                                              group-hover/skill:scale-110 group-hover/skill:shadow-md`}
-								>
-									{item.name.slice(0, 2)}
-								</span>
-							)}
-						</div>
-						<span
-							className='text-xs font-medium text-gray-600 dark:text-gray-400
-                                      group-hover/skill:text-gray-900 dark:group-hover/skill:text-gray-100
-                                      text-center transition-all duration-300
-                                      group-hover/skill:font-semibold group-hover/skill:transform
-                                      group-hover/skill:scale-105'
-						>
-							{item.name}
-						</span>
-					</div>
-				))}
-			</div>
-		</div>
-	);
-}
-
 export default function SkillsSection() {
 	const sectionRef = useTrackSection({ sectionId: SectionId.SKILLS });
 	const { theme } = useTheme();
@@ -220,10 +115,15 @@ export default function SkillsSection() {
 	};
 
 	const prevSlide = () => {
-		setCurrentSlide((prev) => (prev - 1 + skillsConfig.length) % skillsConfig.length);
+		setCurrentSlide(
+			(prev) => (prev - 1 + skillsConfig.length) % skillsConfig.length
+		);
 	};
 
-	const handleDragEnd = (event: any, info: any) => {
+	const handleDragEnd = (
+		event: MouseEvent | TouchEvent | PointerEvent,
+		info: { offset: { x: number } }
+	) => {
 		const swipeThreshold = 50;
 		if (info.offset.x > swipeThreshold) {
 			prevSlide();
@@ -233,11 +133,7 @@ export default function SkillsSection() {
 	};
 
 	return (
-		<section
-			id='skills'
-			ref={sectionRef}
-			className='py-16'
-		>
+		<section id='skills' ref={sectionRef} className='py-16'>
 			<div className='container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl'>
 				<div className='text-center mb-10'>
 					<h2
@@ -271,7 +167,8 @@ export default function SkillsSection() {
 							>
 								{(() => {
 									const category = skillsConfig[currentSlide];
-									const categoryHoverColor = 'group-hover:border-gray-400 dark:group-hover:border-gray-600 group-hover:shadow-gray-200 dark:group-hover:shadow-gray-900/50';
+									const categoryHoverColor =
+										'group-hover:border-gray-400 dark:group-hover:border-gray-600 group-hover:shadow-gray-200 dark:group-hover:shadow-gray-900/50';
 
 									return (
 										<div
@@ -281,7 +178,11 @@ export default function SkillsSection() {
 										>
 											{/* Category Header */}
 											<div className='flex items-center gap-3 mb-4'>
-												{CategoryIcons[category.title as keyof typeof CategoryIcons]}
+												{
+													CategoryIcons[
+														category.title as keyof typeof CategoryIcons
+													]
+												}
 												<h3 className='text-base font-semibold text-gray-800 dark:text-gray-100'>
 													{category.title}
 												</h3>
@@ -319,10 +220,11 @@ export default function SkillsSection() {
 																	height={24}
 																	className={`w-6 h-6 object-contain
                                                ${
-																								theme === 'dark' && isDarkIcon(item.icon)
-																									? 'filter invert brightness-0 contrast-100'
-																									: ''
-																							}`}
+																									theme === 'dark' &&
+																									isDarkIcon(item.icon)
+																										? 'filter invert brightness-0 contrast-100'
+																										: ''
+																								}`}
 																/>
 															) : (
 																<span
@@ -389,7 +291,8 @@ export default function SkillsSection() {
 				{/* Desktop Grid Layout */}
 				<div className='hidden md:grid grid-cols-1 md:grid-cols-2 gap-6'>
 					{skillsConfig.map((category, index) => {
-						const categoryHoverColor = 'group-hover:border-gray-400 dark:group-hover:border-gray-600 group-hover:shadow-gray-200 dark:group-hover:shadow-gray-900/50';
+						const categoryHoverColor =
+							'group-hover:border-gray-400 dark:group-hover:border-gray-600 group-hover:shadow-gray-200 dark:group-hover:shadow-gray-900/50';
 
 						return (
 							<div
@@ -438,10 +341,11 @@ export default function SkillsSection() {
 														height={24}
 														className={`w-6 h-6 object-contain
                                            ${
-																						theme === 'dark' && isDarkIcon(item.icon)
-																							? 'filter invert brightness-0 contrast-100'
-																							: ''
-																					}`}
+																							theme === 'dark' &&
+																							isDarkIcon(item.icon)
+																								? 'filter invert brightness-0 contrast-100'
+																								: ''
+																						}`}
 													/>
 												) : (
 													<span
