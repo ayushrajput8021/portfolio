@@ -75,7 +75,7 @@ export default function Home() {
 	return (
 		<div className='w-full'>
 			<motion.div
-				className='fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-blue-500 dark:from-purple-400 dark:to-blue-400 origin-[0%] z-50'
+				className='fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gray-700 to-gray-900 dark:from-gray-300 dark:to-gray-100 origin-[0%] z-50'
 				style={{ scaleX: scrollYProgress }}
 			/>
 			{/* Unified gradient background container */}
