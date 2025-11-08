@@ -6,7 +6,6 @@ import { useTrackSection } from '@/app/hooks/useTrackSection';
 import { SectionId } from '@/app/services/appwrite';
 import { analyticsService } from '@/app/services/analytics';
 import { useState, useEffect } from 'react';
-import { projects } from '@/app/data/projects';
 import { Info } from 'lucide-react';
 
 // Project types
@@ -199,6 +198,24 @@ export default function ProjectSection() {
 	const [modalProject, setModalProject] = useState<Project | null>(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [showAll, setShowAll] = useState(false);
+	const [projects, setProjects] = useState<Project[]>([]);
+	const [isLoading, setIsLoading] = useState(true);
+
+	// Fetch projects from API
+	useEffect(() => {
+		const fetchProjects = async () => {
+			try {
+				const response = await fetch('/api/projects');
+				const data = await response.json();
+				setProjects(data.projects || []);
+			} catch (error) {
+				console.error('Error fetching projects:', error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+		fetchProjects();
+	}, []);
 
 	// Get unique project types that have actual projects
 	const projectTypes: ProjectType[] = Array.from(
@@ -236,6 +253,22 @@ export default function ProjectSection() {
 		setIsModalOpen(false);
 		setModalProject(null);
 	};
+
+	if (isLoading) {
+		return (
+			<section
+				id='projects'
+				ref={sectionRef}
+				className='py-16'
+			>
+				<div className='container px-4 sm:px-6 lg:px-8 mx-auto max-w-6xl'>
+					<div className='flex justify-center items-center h-64'>
+						<div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900 dark:border-gray-100'></div>
+					</div>
+				</div>
+			</section>
+		);
+	}
 
 	return (
 		<section
