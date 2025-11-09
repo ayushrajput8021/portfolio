@@ -79,202 +79,199 @@ export default function AboutSection() {
 
 	return (
 		<>
-		<section
-			id='about'
-			ref={sectionRef}
-			className='py-16'
-		>
-			<div className='container mx-auto px-4 md:px-8 max-w-6xl'>
-				<h2 className='text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100'>
-					About Me
-				</h2>
-				<div className='flex flex-col md:flex-row gap-8 md:gap-16 items-start'>
-					{/* Left: Image */}
-					<div className='relative group w-full md:w-2/5 max-w-[300px] mx-auto md:mx-0'>
-						<div
-							className='absolute inset-0 bg-gradient-to-br from-blue-100/50 to-transparent
+			<section id='about' ref={sectionRef} className='py-16'>
+				<div className='container mx-auto px-4 md:px-8 max-w-6xl'>
+					<h2 className='text-3xl md:text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100'>
+						About Me
+					</h2>
+					<div className='flex flex-col md:flex-row gap-8 md:gap-16 items-start'>
+						{/* Left: Image */}
+						<div className='relative group w-full md:w-2/5 max-w-[300px] mx-auto md:mx-0'>
+							<div
+								className='absolute inset-0 bg-gradient-to-br from-blue-100/50 to-transparent
                                      dark:from-blue-900/20 dark:to-transparent rounded-2xl
                                      -rotate-2 scale-95 group-hover:rotate-0 group-hover:scale-100
                                      transition-all duration-500 ease-out'
-						/>
-						<Image
-							src={
-								'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/Mine-ghibili.png'
-							}
-							alt='Profile picture'
-							className='relative rounded-2xl object-cover w-full h-auto shadow-xl
+							/>
+							<Image
+								src={
+									'https://res.cloudinary.com/db9eklbab/image/upload/v1762706447/Mine-ghibili_agnsvw.png'
+								}
+								alt='Profile picture'
+								className='relative rounded-2xl object-cover w-full h-auto shadow-xl
                                      grayscale hover:grayscale-0 transition-all duration-500
                                      group-hover:shadow-2xl group-hover:scale-[1.02]'
-							width={450}
-							height={400}
-							priority
-						/>
-					</div>
-
-					{/* Right: Content */}
-					<div className='flex-1 space-y-6'>
-						{/* Bio */}
-						<div>
-							<h3
-								className='text-2xl md:text-3xl font-bold mb-3
-                               text-gray-900 dark:text-gray-100'
-							>
-								Building Digital Experiences,
-								<br />
-								<span className='text-blue-600 dark:text-blue-400'>
-									Not Just Code
-								</span>
-							</h3>
-							<p
-								className='text-base md:text-lg text-gray-600 dark:text-gray-400 
-                              leading-relaxed'
-							>
-								As a Full Stack Developer based in India, I specialize in
-								creating holistic web solutions that combine technical excellence
-								with user-centered design. With over a year of professional
-								experience, I approach each project as a unique puzzle to solve.
-							</p>
+								width={450}
+								height={400}
+								priority
+							/>
 						</div>
 
-						{/* Stats */}
-						<div className='flex flex-wrap gap-4 pt-4 border-t border-gray-100 dark:border-gray-800'>
-							<div className='flex items-center gap-3 group/stat'>
-								<div
-									className='p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg
+						{/* Right: Content */}
+						<div className='flex-1 space-y-6'>
+							{/* Bio */}
+							<div>
+								<h3
+									className='text-2xl md:text-3xl font-bold mb-3
+                               text-gray-900 dark:text-gray-100'
+								>
+									Building Digital Experiences,
+									<br />
+									<span className='text-blue-600 dark:text-blue-400'>
+										Not Just Code
+									</span>
+								</h3>
+								<p
+									className='text-base md:text-lg text-gray-600 dark:text-gray-400
+                              leading-relaxed'
+								>
+									As a Full Stack Developer based in India, I specialize in
+									creating holistic web solutions that combine technical
+									excellence with user-centered design. With over 2+ years of
+									professional experience, I approach each project as a unique
+									puzzle to solve.
+								</p>
+							</div>
+
+							{/* Stats */}
+							<div className='flex flex-wrap gap-4 pt-4 border-t border-gray-100 dark:border-gray-800'>
+								<div className='flex items-center gap-3 group/stat'>
+									<div
+										className='p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg
                                   group-hover/stat:bg-blue-200 dark:group-hover/stat:bg-blue-800
                                   transition-all duration-300'
-								>
-									<svg
-										className='w-6 h-6 text-blue-600 dark:text-blue-400'
-										fill='none'
-										stroke='currentColor'
-										viewBox='0 0 24 24'
 									>
-										<path
-											strokeLinecap='round'
-											strokeLinejoin='round'
-											strokeWidth={2}
-											d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
-										/>
-									</svg>
+										<svg
+											className='w-6 h-6 text-blue-600 dark:text-blue-400'
+											fill='none'
+											stroke='currentColor'
+											viewBox='0 0 24 24'
+										>
+											<path
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												strokeWidth={2}
+												d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+											/>
+										</svg>
+									</div>
+									<div>
+										<p className='text-sm font-semibold text-gray-900 dark:text-gray-200'>
+											1.5+ Years
+										</p>
+										<p className='text-sm text-gray-500 dark:text-gray-400'>
+											Experience
+										</p>
+									</div>
 								</div>
-								<div>
-									<p className='text-sm font-semibold text-gray-900 dark:text-gray-200'>
-										1.5+ Years
-									</p>
-									<p className='text-sm text-gray-500 dark:text-gray-400'>
-										Experience
-									</p>
-								</div>
-							</div>
 
-							<div className='flex items-center gap-3 group/stat'>
-								<div
-									className='p-2 bg-purple-100 dark:bg-purple-900/50 rounded-lg
-                                  group-hover/stat:bg-purple-200 
+								<div className='flex items-center gap-3 group/stat'>
+									<div
+										className='p-2 bg-purple-100 dark:bg-purple-900/50 rounded-lg
+                                  group-hover/stat:bg-purple-200
                                   dark:group-hover/stat:bg-purple-800
                                   transition-all duration-300'
-								>
-									<svg
-										className='w-6 h-6 text-purple-600 dark:text-purple-400'
-										fill='none'
-										stroke='currentColor'
-										viewBox='0 0 24 24'
 									>
-										<path
-											strokeLinecap='round'
-											strokeLinejoin='round'
-											strokeWidth={2}
-											d='M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5'
-										/>
-									</svg>
-								</div>
-								<div>
-									<p className='text-sm font-semibold text-gray-900 dark:text-gray-200'>
-										8+ Projects
-									</p>
-									<p className='text-sm text-gray-500 dark:text-gray-400'>
-										Completed
-									</p>
+										<svg
+											className='w-6 h-6 text-purple-600 dark:text-purple-400'
+											fill='none'
+											stroke='currentColor'
+											viewBox='0 0 24 24'
+										>
+											<path
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												strokeWidth={2}
+												d='M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5'
+											/>
+										</svg>
+									</div>
+									<div>
+										<p className='text-sm font-semibold text-gray-900 dark:text-gray-200'>
+											8+ Projects
+										</p>
+										<p className='text-sm text-gray-500 dark:text-gray-400'>
+											Completed
+										</p>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						{/* Current Role Card */}
-						<div
-							className='bg-gradient-to-br from-blue-50 to-purple-50 
+							{/* Current Role Card */}
+							<div
+								className='bg-gradient-to-br from-blue-50 to-purple-50
                               dark:from-blue-950/30 dark:to-purple-950/30
-                              rounded-xl p-5 border border-blue-200/50 
+                              rounded-xl p-5 border border-blue-200/50
                               dark:border-blue-800/50'
-						>
-							<div className='flex items-start gap-3 mb-3'>
-								<div className='p-2 bg-blue-600 dark:bg-blue-500 rounded-lg'>
-									<Briefcase className='w-5 h-5 text-white' />
-								</div>
-								<div className='flex-1'>
-									<h4 className='text-lg font-bold text-gray-900 dark:text-gray-100'>
-										{currentRole.title}
-									</h4>
-									<p className='text-blue-600 dark:text-blue-400 font-medium'>
-										{currentRole.company}
-									</p>
-								</div>
-								<span
-									className='px-3 py-1 bg-green-100 dark:bg-green-900/50 
-                                   text-green-600 dark:text-green-300 
+							>
+								<div className='flex items-start gap-3 mb-3'>
+									<div className='p-2 bg-blue-600 dark:bg-blue-500 rounded-lg'>
+										<Briefcase className='w-5 h-5 text-white' />
+									</div>
+									<div className='flex-1'>
+										<h4 className='text-lg font-bold text-gray-900 dark:text-gray-100'>
+											{currentRole.title}
+										</h4>
+										<p className='text-blue-600 dark:text-blue-400 font-medium'>
+											{currentRole.company}
+										</p>
+									</div>
+									<span
+										className='px-3 py-1 bg-green-100 dark:bg-green-900/50
+                                   text-green-600 dark:text-green-300
                                    text-xs font-medium rounded-full'
-								>
-									Current
-								</span>
-							</div>
-							<div className='flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400'>
-								<div className='flex items-center gap-1'>
-									<Calendar className='w-4 h-4' />
-									<span>{currentRole.timeline}</span>
+									>
+										Current
+									</span>
 								</div>
-								<div className='flex items-center gap-1'>
-									<MapPin className='w-4 h-4' />
-									<span>{currentRole.location}</span>
+								<div className='flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400'>
+									<div className='flex items-center gap-1'>
+										<Calendar className='w-4 h-4' />
+										<span>{currentRole.timeline}</span>
+									</div>
+									<div className='flex items-center gap-1'>
+										<MapPin className='w-4 h-4' />
+										<span>{currentRole.location}</span>
+									</div>
 								</div>
 							</div>
-						</div>
 
-						{/* View Full Experience Button */}
-						<button
-							onClick={() => setIsModalOpen(true)}
-							className='w-full md:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700
+							{/* View Full Experience Button */}
+							<button
+								onClick={() => setIsModalOpen(true)}
+								className='w-full md:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700
                            dark:bg-blue-500 dark:hover:bg-blue-600
                            text-white font-semibold rounded-lg
                            transition-all duration-300 transform hover:scale-105
                            flex items-center justify-center gap-2 group'
-						>
-							<span>View Full Experience</span>
-							<svg
-								className='w-5 h-5 transform group-hover:translate-x-1 
-                               transition-transform duration-300'
-								fill='none'
-								stroke='currentColor'
-								viewBox='0 0 24 24'
 							>
-								<path
-									strokeLinecap='round'
-									strokeLinejoin='round'
-									strokeWidth={2}
-									d='M13 7l5 5m0 0l-5 5m5-5H6'
-								/>
-							</svg>
-						</button>
+								<span>View Full Experience</span>
+								<svg
+									className='w-5 h-5 transform group-hover:translate-x-1
+                               transition-transform duration-300'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth={2}
+										d='M13 7l5 5m0 0l-5 5m5-5H6'
+									/>
+								</svg>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
-		{/* Experience Modal */}
-		<ExperienceModal
-			isOpen={isModalOpen}
-			onClose={() => setIsModalOpen(false)}
-			experiences={experiences}
-		/>
-	</>
+			{/* Experience Modal */}
+			<ExperienceModal
+				isOpen={isModalOpen}
+				onClose={() => setIsModalOpen(false)}
+				experiences={experiences}
+			/>
+		</>
 	);
 }

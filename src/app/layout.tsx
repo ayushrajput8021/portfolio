@@ -21,6 +21,30 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: 'Ayush Rajput',
+		url: 'https://ayushrajput.in',
+		jobTitle: 'Full Stack Developer',
+		description:
+			'Full Stack Developer specializing in React, Node.js, TypeScript & Next.js',
+		sameAs: [
+			'https://github.com/ayushrajput',
+			'https://linkedin.com/in/ayushrajput',
+		],
+		knowsAbout: [
+			'JavaScript',
+			'TypeScript',
+			'React',
+			'Node.js',
+			'Next.js',
+			'MongoDB',
+			'PostgreSQL',
+			'Web Development',
+		],
+	};
+
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<head>
@@ -29,6 +53,10 @@ export default function RootLayout({
 					src='https://cloud.umami.is/script.js'
 					data-website-id='895fa928-e1bd-4626-9bad-2af0d108c567'
 				></script>
+				<script
+					type='application/ld+json'
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				/>
 			</head>
 			<body className={`${nunito.className} antialiased`}>
 				<ThemeProvider attribute='class' defaultTheme='light' enableColorScheme>

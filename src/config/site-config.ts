@@ -3,13 +3,13 @@ import { Metadata } from 'next';
 const TITLE =
 	'Ayush Rajput - Full Stack Developer | React, Node.js, TypeScript, Next.js';
 const DESCRIPTION =
-	'Hi there! 👋 I m a Full Stack Developer from India with over 1 year of experience in web development. I have a passion for solving complex problems and building innovative web applications. My tech stack includes JavaScript, TypeScript, React, Node.js, Express.js, MongoDB, Prisma, PostgreSQL, Vercel, Next.js, and more.';
+	'Full Stack Developer specializing in React, Node.js, TypeScript & Next.js. Building scalable web applications with modern JavaScript frameworks and databases.';
 
 const PREVIEW_IMAGE_URL =
-	'https://a1tvj0wtyb3ubfje.public.blob.vercel-storage.com/preview-img';
+	'https://res.cloudinary.com/db9eklbab/image/upload/v1762706447/Mine-ghibili_agnsvw.png';
 const ALT_TITLE =
 	'Ayush Rajput - Full Stack Developer | React, Node.js, TypeScript, Next.js';
-const BASE_URL = 'https://ayushrajput.live';
+const BASE_URL = 'https://ayushrajput.in';
 
 export const siteConfig: Metadata = {
 	title: TITLE,
@@ -19,6 +19,21 @@ export const siteConfig: Metadata = {
 	},
 	applicationName: 'Ayush Rajput - Portfolio',
 	creator: 'Ayush Rajput',
+	authors: [{ name: 'Ayush Rajput', url: BASE_URL }],
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			'max-video-preview': -1,
+			'max-image-preview': 'large',
+			'max-snippet': -1,
+		},
+	},
+	verification: {
+		google: 'your-google-verification-code', // Add your Google Search Console verification code
+	},
 
 	openGraph: {
 		title: TITLE,
