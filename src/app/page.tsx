@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes';
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { ArrowUpIcon } from 'lucide-react';
+import Snowfall from 'react-snowfall';
 
 import Slide from './components/Slider';
 import HeroSection from './components/sections/HeroSection';
@@ -74,6 +75,7 @@ export default function Home() {
 
 	return (
 		<div className='w-full'>
+			<Snowfall color='#FFFFFF' style={{ zIndex: 1 }} snowflakeCount={300} />
 			<motion.div
 				className='fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gray-700 to-gray-900 dark:from-gray-300 dark:to-gray-100 origin-[0%] z-50'
 				style={{ scaleX: scrollYProgress }}
@@ -84,7 +86,7 @@ export default function Home() {
 				<div className='fixed top-20 left-10 w-96 h-96 bg-gray-200 dark:bg-gray-800 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-20 animate-blob' />
 				<div className='fixed top-40 right-10 w-96 h-96 bg-gray-300 dark:bg-gray-700 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-20 animate-blob animation-delay-2000' />
 				<div className='fixed bottom-20 left-1/3 w-96 h-96 bg-gray-400 dark:bg-gray-600 rounded-full mix-blend-multiply dark:mix-blend-soft-light filter blur-3xl opacity-20 animate-blob animation-delay-4000' />
-				
+
 				<main className='relative z-10 flex flex-col flex-grow'>
 					<button
 						onClick={handleThemeToggle}
